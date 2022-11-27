@@ -63,17 +63,15 @@ struct ProfileEditView: View {
 						.frame(width: 250, height: 20)
 				}
 				
-				
 				Section(header: Text("Select your gender.")) {
 					Picker("Gender ", selection: $gender) {
 						ForEach(genders, id: \.self) {
 							Text($0)
 						}
 					}
-					.padding(.leading, 300)
 					.pickerStyle(WheelPickerStyle())
 					.clipped()
-					.frame(width: 100, height: 50)
+					.frame(width: 100, height: 40)
 				}
 				
 				Section(header: Text("Pre-Existing Condition")) {
@@ -82,10 +80,9 @@ struct ProfileEditView: View {
 							Text($0)
 						}
 					}
-					.padding(.leading, 300)
 					.pickerStyle(WheelPickerStyle())
 					.clipped()
-					.frame(width: 100, height: 50)
+					.frame(width: 100, height: 40)
 				}
 			}
 			.navigationTitle("Add you details")

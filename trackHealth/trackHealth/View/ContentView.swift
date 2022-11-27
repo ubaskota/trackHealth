@@ -28,7 +28,7 @@ struct ContentView: View {
 						case "Workout":
 							WorkoutView()
 						case "Sleep":
-							SleepView()
+							SleepView(audioRecorder: AudioRecorder())
 						case "Review":
 							ReviewView()
 						default:

@@ -43,7 +43,6 @@ struct AddMealView: View {
 					TextField("Total Calories", value: $total_calories, formatter: NumberFormatter())
 						.keyboardType(.decimalPad)
 				}
-				
 			}
 			.navigationTitle("Add Your Meals")
 			.toolbar {
