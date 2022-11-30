@@ -8,46 +8,53 @@
 import SwiftUI
 
 struct SleepView: View {
-	@ObservedObject var audioRecorder: AudioRecorder
+	let viewOptions: [String] = ["sleep_record", "sleep_history"]
+	let imageOptions: [String: String] = ["sleep_record": "microphoneImg", "sleep_history": "graphImg"]
+	let textOptions: [String: String] = ["sleep_record":"Record", "sleep_history": "Results"]
 	
-	
-    var body: some View {
+	var body: some View {
 		NavigationView {
-			VStack {
-				
-				RecordingListView(audioRecorder: AudioRecorder())
-				
-				if audioRecorder.recording == false {
-					Button(action: {self.audioRecorder.startRecording()}) {
-						Image(systemName: "circle.fill")
-							.resizable()
-							.aspectRatio(contentMode: .fill)
-							.frame(width: 100, height: 100)
-							.clipped()
-							.foregroundColor(.red)
-							.padding(.bottom, 40)
+		ScrollView {
+				ForEach(viewOptions, id: \.self) { topic in
+					NavigationLink {
+						switch topic {
+						case "sleep_record":
+							SleepRecordView(audioRecorder: AudioRecorder())
+						default:
+							SleepHistoryView()
+						}
+					} label: {
+						VStack {
+							Image(imageOptions[topic]!)
+								.resizable()
+								.scaledToFit()
+								.frame(width: 200, height: 200)
+								.padding()
+							VStack {
+								Text(textOptions[topic]!)
+								.font(.headline)
+								.foregroundColor(.green)
+						}
+								.padding(.vertical)
+								.frame(maxWidth: 100)
+								.background(.darkBackground)
+							}
+						.clipShape(RoundedRectangle(cornerRadius: 10))
+						.overlay(RoundedRectangle(cornerRadius: 10)
+							.stroke(.lightBackground))
+						.background(.darkBackground)
 					}
 				}
-				else {
-					Button(action: {self.audioRecorder.stopRecording()}) {
-						Image(systemName: "stop.fill")
-							.resizable()
-							.aspectRatio(contentMode: .fill)
-							.frame(width: 100, height: 100)
-							.clipped()
-							.foregroundColor(.red)
-							.padding(.bottom, 40)
-					}
-				}
+				.padding([.horizontal, .bottom])
+				.background(.white)
 			}
 		}
-		.navigationBarTitle("Sleep Recorder")
-    }
+	}
 }
 
 
 struct SleepView_Previews: PreviewProvider {
     static var previews: some View {
-        SleepView(audioRecorder: AudioRecorder())
+        SleepView()
     }
 }

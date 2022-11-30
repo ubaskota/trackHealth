@@ -21,6 +21,11 @@
 		0C4014F429318D8100CCF391 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4014F329318D8100CCF391 /* AudioRecorder.swift */; };
 		0C4014F62931B6B200CCF391 /* RecordingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4014F52931B6B200CCF391 /* RecordingListView.swift */; };
 		0C4014F82931BC2E00CCF391 /* Date-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4014F72931BC2E00CCF391 /* Date-Extension.swift */; };
+		0C465A65293317A8006392B0 /* RecordHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C465A64293317A8006392B0 /* RecordHelper.swift */; };
+		0C465A6A29341FB8006392B0 /* AudioDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C465A6929341FB8006392B0 /* AudioDisplay.swift */; };
+		0C465A6C29343B09006392B0 /* RecordedDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C465A6B29343B09006392B0 /* RecordedDetailView.swift */; };
+		0C465AAC2936F66E006392B0 /* SleepRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C465AAB2936F66E006392B0 /* SleepRecordView.swift */; };
+		0C465AAE2936F88F006392B0 /* SleepHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C465AAD2936F88F006392B0 /* SleepHistoryView.swift */; };
 		0C7ACDBF2921EE6C009C32C8 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7ACDBE2921EE6B009C32C8 /* ProfileEditView.swift */; };
 		0C8752F72922B7210080228F /* ProfileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8752F62922B7210080228F /* ProfileItem.swift */; };
 		0C8752F92922B8ED0080228F /* ProfileDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8752F82922B8ED0080228F /* ProfileDetails.swift */; };
@@ -43,9 +48,14 @@
 		0C03B2DD28485A7100CBEEBA /* AddMealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealView.swift; sourceTree = "<group>"; };
 		0C03B2DF2849A69000CBEEBA /* SleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView.swift; sourceTree = "<group>"; };
 		0C03B2E12849A6A000CBEEBA /* WorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutView.swift; sourceTree = "<group>"; };
-		0C4014F329318D8100CCF391 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AudioRecorder.swift; path = ../AudioRecorder.swift; sourceTree = "<group>"; };
+		0C4014F329318D8100CCF391 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		0C4014F52931B6B200CCF391 /* RecordingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingListView.swift; sourceTree = "<group>"; };
 		0C4014F72931BC2E00CCF391 /* Date-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date-Extension.swift"; sourceTree = "<group>"; };
+		0C465A64293317A8006392B0 /* RecordHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecordHelper.swift; path = ../../RecordHelper.swift; sourceTree = "<group>"; };
+		0C465A6929341FB8006392B0 /* AudioDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDisplay.swift; sourceTree = "<group>"; };
+		0C465A6B29343B09006392B0 /* RecordedDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordedDetailView.swift; sourceTree = "<group>"; };
+		0C465AAB2936F66E006392B0 /* SleepRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepRecordView.swift; sourceTree = "<group>"; };
+		0C465AAD2936F88F006392B0 /* SleepHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepHistoryView.swift; sourceTree = "<group>"; };
 		0C7ACDBE2921EE6B009C32C8 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		0C8752F62922B7210080228F /* ProfileItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileItem.swift; sourceTree = "<group>"; };
 		0C8752F82922B8ED0080228F /* ProfileDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetails.swift; sourceTree = "<group>"; };
@@ -86,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				0C03B2C1283F1CE500CBEEBA /* trackHealthApp.swift */,
+				0C465A64293317A8006392B0 /* RecordHelper.swift */,
 				0C4014EF29312F5A00CCF391 /* View */,
 				0C4014F029312F9900CCF391 /* Controller */,
 				0C8752FA292803240080228F /* HealthData.xcdatamodeld */,
@@ -113,7 +124,8 @@
 				0C8752F82922B8ED0080228F /* ProfileDetails.swift */,
 				0C8752F62922B7210080228F /* ProfileItem.swift */,
 				0C03B2D528470A6400CBEEBA /* MealItem.swift */,
-				0C9182CB293308DB00BBF9F1 /* New Group */,
+				0C4014F329318D8100CCF391 /* AudioRecorder.swift */,
+				0C465A6929341FB8006392B0 /* AudioDisplay.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -123,12 +135,15 @@
 			children = (
 				0C03B2E12849A6A000CBEEBA /* WorkoutView.swift */,
 				0C03B2DF2849A69000CBEEBA /* SleepView.swift */,
+				0C465AAD2936F88F006392B0 /* SleepHistoryView.swift */,
+				0C465AAB2936F66E006392B0 /* SleepRecordView.swift */,
 				0C03B2C3283F1CE500CBEEBA /* ContentView.swift */,
 				0C03B2D32846EDF800CBEEBA /* FoodView.swift */,
 				0C875301292837B60080228F /* ReviewView.swift */,
 				0C03B2DD28485A7100CBEEBA /* AddMealView.swift */,
 				0C7ACDBE2921EE6B009C32C8 /* ProfileEditView.swift */,
 				0C4014F52931B6B200CCF391 /* RecordingListView.swift */,
+				0C465A6B29343B09006392B0 /* RecordedDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -156,14 +171,6 @@
 				0C4014F72931BC2E00CCF391 /* Date-Extension.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		0C9182CB293308DB00BBF9F1 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-				0C4014F329318D8100CCF391 /* AudioRecorder.swift */,
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,19 +243,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C465AAC2936F66E006392B0 /* SleepRecordView.swift in Sources */,
 				0C03B2D42846EDF900CBEEBA /* FoodView.swift in Sources */,
 				0C8752F72922B7210080228F /* ProfileItem.swift in Sources */,
 				0C03B2C4283F1CE500CBEEBA /* ContentView.swift in Sources */,
 				0C7ACDBF2921EE6C009C32C8 /* ProfileEditView.swift in Sources */,
+				0C465A65293317A8006392B0 /* RecordHelper.swift in Sources */,
 				0C03B2D628470A6400CBEEBA /* MealItem.swift in Sources */,
 				0C03B2DE28485A7100CBEEBA /* AddMealView.swift in Sources */,
+				0C465A6C29343B09006392B0 /* RecordedDetailView.swift in Sources */,
 				0C4014F429318D8100CCF391 /* AudioRecorder.swift in Sources */,
 				0C03B2E22849A6A000CBEEBA /* WorkoutView.swift in Sources */,
 				0C8752FE292807200080228F /* DataController.swift in Sources */,
 				0C03B2DC2848589B00CBEEBA /* MealDetails.swift in Sources */,
 				0C03B2D0283F2FD800CBEEBA /* Color-Theme.swift in Sources */,
 				0C875302292837B60080228F /* ReviewView.swift in Sources */,
+				0C465AAE2936F88F006392B0 /* SleepHistoryView.swift in Sources */,
 				0C4014F62931B6B200CCF391 /* RecordingListView.swift in Sources */,
+				0C465A6A29341FB8006392B0 /* AudioDisplay.swift in Sources */,
 				0C8752FC292803250080228F /* HealthData.xcdatamodeld in Sources */,
 				0C9182CA293304FA00BBF9F1 /* RecordingDataModel.swift in Sources */,
 				0C03B2E02849A69000CBEEBA /* SleepView.swift in Sources */,

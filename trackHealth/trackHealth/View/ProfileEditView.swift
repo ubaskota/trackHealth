@@ -12,14 +12,11 @@ struct ProfileEditView: View {
 	
 	@Environment(\.managedObjectContext) var moc
 	
-//	@ObservedObject var profile_details: ProfileDetails
 	@Environment(\.dismiss) var dismiss
 	
 	let races = ["Asian", "Black", "South Asian", "White", "Hispanic", "American Indian", "Other"]
-//	@State private var raceIndex = 0
 	
 	let conditions = ["Yes", "No"]
-//	@State private var conditionIndex = 0
 	
 	let genders = ["Male", "Female", "Other"]
 	
@@ -104,8 +101,6 @@ struct ProfileEditView: View {
 					profile.weight = Float(weight) ?? 0.0
 //					profile.preExistingConditions = true
 					profile.preExistingConditions = preExistingConditions == "Yes" ? true : false
-
-					
 					
 //					try? moc.save()
 					do {
@@ -117,12 +112,12 @@ struct ProfileEditView: View {
 //						fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
 						}
 					dismiss()
-					
 				}
 				.disabled(disableForm)
 			}
 		}
 	}
+	
 	
 	var disableForm: Bool {
 		if (checkIfEmpty() == true) && (checkIfNumber(input: age) && checkIfNumber(input: height) && checkIfNumber(input: weight)) {
@@ -130,6 +125,7 @@ struct ProfileEditView: View {
 		}
 		return false
 	}
+	
 	
 	func checkIfEmpty() -> Bool {
 		if (userName.isEmpty && displayName.isEmpty && age.isEmpty && height.isEmpty && weight.isEmpty) {

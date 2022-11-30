@@ -11,9 +11,30 @@ struct RecordingListView: View {
 	@ObservedObject var audioRecorder: AudioRecorder
 	
     var body: some View {
-        Text("Hello, World!")
-    }
+		List {
+//			ForEach(audioRecorder.recordings, id: \.createdAt) { recording in
+//				RecordingRowView(audioURL: recording.fileURL)
+//			}
+			ForEach(audioRecorder.recordingsForDisaply, id: \.displayCreationDate) { recording in
+				Text(recording.displayCreationDate)
+				Spacer()
+			}
+		}
+	}
 }
+
+
+//struct RecordingRowView: View {
+//	var audioURL: URL
+//
+//	var body: some View {
+//		HStack {
+//			Text("\(audioURL.lastPathComponent)")
+//			Spacer()
+//		}
+//	}
+//}
+
 
 struct RecordingListView_Previews: PreviewProvider {
     static var previews: some View {

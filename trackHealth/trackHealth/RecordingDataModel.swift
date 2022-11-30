@@ -15,3 +15,7 @@ struct Recording {
 }
 
 
+struct DisplayRecording {
+	let displayCreationDate: String
+	let createdAt: Date
+}
