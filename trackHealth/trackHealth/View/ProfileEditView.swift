@@ -31,15 +31,6 @@ struct ProfileEditView: View {
 	@State private var preExistingConditions = ""
 	@State private var uuid = UUID()
 	
-//	Group {
-//		Button(action: {
-//			Text("Action")
-//		}) {
-//			Image(systemName: "info.circle")
-//				.foregroundColor(.accentColor)
-//		}
-//	}
-//
 	
     var body: some View {
 		NavigationView {
@@ -72,8 +63,7 @@ struct ProfileEditView: View {
 									Text($0)
 								}
 							}
-							.clipped()
-							.frame(width: 250, height: 20)
+							.font(.system(size: 20, weight: .bold, design: .default)).foregroundColor(Color.green)
 					}
 					
 					Section(header: Text("Select your gender.")) {
@@ -130,7 +120,7 @@ struct ProfileEditView: View {
 						dismiss()
 					}
 					.disabled(disableForm)
-			}
+				}
 			}
 		}
 	}

@@ -34,6 +34,7 @@
 		0C8752FE292807200080228F /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8752FD292807200080228F /* DataController.swift */; };
 		0C875302292837B60080228F /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C875301292837B60080228F /* ReviewView.swift */; };
 		0CCB2EEA29396C3E0055BCA7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCB2EE929396C3E0055BCA7 /* LoginView.swift */; };
+		0CD68A5C293B05DC00FA6A40 /* SleepRecordSurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD68A5B293B05DC00FA6A40 /* SleepRecordSurveyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		0C8752FD292807200080228F /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		0C875301292837B60080228F /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		0CCB2EE929396C3E0055BCA7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		0CD68A5B293B05DC00FA6A40 /* SleepRecordSurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepRecordSurveyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 				0C03B2DF2849A69000CBEEBA /* SleepView.swift */,
 				0C465AAD2936F88F006392B0 /* SleepHistoryView.swift */,
 				0C465AAB2936F66E006392B0 /* SleepRecordView.swift */,
+				0CD68A5B293B05DC00FA6A40 /* SleepRecordSurveyView.swift */,
 				0C03B2C3283F1CE500CBEEBA /* ContentView.swift */,
 				0C03B2D32846EDF800CBEEBA /* FoodView.swift */,
 				0C875301292837B60080228F /* ReviewView.swift */,
@@ -255,6 +258,7 @@
 				0C7ACDBF2921EE6C009C32C8 /* ProfileEditView.swift in Sources */,
 				0C03B2D628470A6400CBEEBA /* MealItem.swift in Sources */,
 				0C03B2DE28485A7100CBEEBA /* AddMealView.swift in Sources */,
+				0CD68A5C293B05DC00FA6A40 /* SleepRecordSurveyView.swift in Sources */,
 				0C465A6C29343B09006392B0 /* RecordedDetailView.swift in Sources */,
 				0C4014F429318D8100CCF391 /* AudioRecorder.swift in Sources */,
 				0C03B2E22849A6A000CBEEBA /* WorkoutView.swift in Sources */,

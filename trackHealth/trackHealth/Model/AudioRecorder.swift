@@ -111,10 +111,9 @@ class AudioRecorder: NSObject, ObservableObject {
 	}
 	
 	
-	func saveToCoreData(survey: String) -> String {
+	func saveToCoreData(survey: Int8) -> String {
 		print("This is the survey : ", survey)
 		return "Hello"
 	}
-	
 }
 

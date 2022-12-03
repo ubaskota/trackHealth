@@ -80,8 +80,10 @@ struct ContentView: View {
 			.navigationTitle("Track-Health")
 		}
 		.background(.darkBackground)
+		.navigationBarBackButtonHidden(true)
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
