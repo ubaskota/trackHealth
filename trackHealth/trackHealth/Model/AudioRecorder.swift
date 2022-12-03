@@ -24,6 +24,14 @@ class AudioRecorder: NSObject, ObservableObject {
 	var recordings = [Recording]()
 	var recordingsForDisaply = [DisplayRecording]()
 	
+	var sleepStartTime: Date!
+	var sleepStopTime: Date!
+	var sleepFileName: String!
+	var soundDb: [Float]!
+	var survey: Bool!
+	var uuid: UUID!
+	var sleepScore: Float!
+	
 	
 	var recording = false {
 		didSet {
@@ -33,6 +41,8 @@ class AudioRecorder: NSObject, ObservableObject {
 	
 	
 	func startRecording() {
+		
+		deleteAllPreviousRecordings()  // Need to delete previous recordings for clearup space as we not need the files later
 		let recordingSession = AVAudioSession.sharedInstance()
 		
 		do {
@@ -57,6 +67,20 @@ class AudioRecorder: NSObject, ObservableObject {
 		} catch {
 			print("Could not start recording")
 		}
+	}
+	
+	
+	func deleteAllPreviousRecordings() {
+		
+		let documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+		do {
+			let fileURLs = try FileManager.default.contentsOfDirectory(at: documentsUrl,
+																	   includingPropertiesForKeys: nil,
+																	   options: .skipsHiddenFiles)
+			for fileURL in fileURLs where fileURL.pathExtension == "m4a" {
+				try FileManager.default.removeItem(at: fileURL)
+			}
+		} catch  { print("Error deleteing file : ", error) }
 	}
 	
 	
@@ -86,6 +110,11 @@ class AudioRecorder: NSObject, ObservableObject {
 		objectWillChange.send(self)
 	}
 	
+	
+	func saveToCoreData(survey: String) -> String {
+		print("This is the survey : ", survey)
+		return "Hello"
+	}
 	
 }
 
