@@ -9,12 +9,16 @@ import SwiftUI
 
 struct ReviewView: View {
 	@Environment(\.managedObjectContext) var moc
-	@FetchRequest(sortDescriptors: []) var profileInfo: FetchedResults<Profile>
-		
+//	@FetchRequest(sortDescriptors: []) var profileInfo: FetchedResults<Profile>
+	@FetchRequest(sortDescriptors: []) var sleepInfo: FetchedResults<Sleep>
+	
     var body: some View {
 		Text("Lamo Kera")
-		List(profileInfo){ pInfo in
-			Text(pInfo.race ?? "Geda")
+//		let sleepDB = audioRecorder.unarchiveSleepDB()
+
+		List(sleepInfo){ pInfo in
+			Text(String(pInfo.survey) ?? "Geda")
+			
 			
 //			ForEach(profileInfo) { pInfo in
 //				VStack {
@@ -25,7 +29,26 @@ struct ReviewView: View {
 //				}
 //			}
 		}
+//		Text("This is sleepdb: \(sleepDB)")
     }
+	
+
+	func unarchiveSleepDB() -> [String] {
+		let sleep = Sleep(context: moc)
+
+		if let sleep = sleep.soundDb {
+		  do {
+			if let sleepDBArray = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: sleep) as? [String] {
+			  dump(sleepDBArray)
+				return sleepDBArray
+			}
+		  } catch {
+			print("could not unarchive array: \(error)")
+		  }
+		}
+		return []
+	}
+
 }
 
 struct ReviewView_Previews: PreviewProvider {

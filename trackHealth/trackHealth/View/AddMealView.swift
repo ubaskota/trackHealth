@@ -68,18 +68,18 @@ struct AddMealView: View {
 					dismiss()
 				}
 				.font(.system(size: 20, weight: .bold, design: .default))
-//				.foregroundColor(disableForm ? .white : .green)
-				.disabled(foodOne.count < 3 && total_calories == 0)
+				.foregroundColor(disableForm ? .white : .green)
+				.disabled(disableForm)
 			}
 		}
     }
 	
-//	var disableForm: Bool {
-//		if (foodOne.isEmpty) && (foodOne.count < 3) && (total_calories <= 0) {
-//			return true
-//		}
-//		return false
-//	}
+	var disableForm: Bool {
+		if (foodOne.isEmpty) || (foodOne.count < 3) || (total_calories <= 0) {
+			return true
+		}
+		return false
+	}
 }
 
 

@@ -13,9 +13,13 @@ import AVFoundation
 
 class AudioRecorder: NSObject, ObservableObject {
 	
+//	@Environment(\.managedObjectContext) var moc
+//	var moc = PersistentController.shared.container.viewContext
+	var moc = DataController.init().container.viewContext
+	
 	override init() {
 		super.init()
-		fetchRecordings()
+//		fetchRecordings()
 	}
 	
 	let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
@@ -24,13 +28,13 @@ class AudioRecorder: NSObject, ObservableObject {
 	var recordings = [Recording]()
 	var recordingsForDisaply = [DisplayRecording]()
 	
-	var sleepStartTime: Date!
-	var sleepStopTime: Date!
-	var sleepFileName: String!
-	var soundDb: [Float]!
-	var survey: Bool!
-	var uuid: UUID!
-	var sleepScore: Float!
+	@Published var sleepStartTime: Date!
+	@Published var sleepStopTime: Date!
+	@Published var sleepFileName: String!
+	@Published var soundDb = [Float]()
+//	var survey: Int16!
+	@Published var uuid: UUID!
+	@Published var sleepScore: Float!
 	
 	
 	var recording = false {
@@ -54,7 +58,9 @@ class AudioRecorder: NSObject, ObservableObject {
 		}
 		
 		let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-		let audioFilename = documentPath.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
+		let startDateTime = Date()
+		self.sleepStartTime = startDateTime
+		let audioFilename = documentPath.appendingPathComponent("\(startDateTime.toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
 		let settings = [
 			AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
 			AVSampleRateKey: 12000,
@@ -63,7 +69,15 @@ class AudioRecorder: NSObject, ObservableObject {
 		do {
 			audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
 			audioRecorder.record()
+			audioRecorder.isMeteringEnabled = true
 			recording = true
+			
+			Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [self] timer in
+				self.audioRecorder.updateMeters()
+				let db = audioRecorder.averagePower(forChannel: 0)
+				soundDb.append(db)
+//				print(soundDb)
+			}
 		} catch {
 			print("Could not start recording")
 		}
@@ -87,33 +101,112 @@ class AudioRecorder: NSObject, ObservableObject {
 	func stopRecording() {
 		audioRecorder.stop()
 		recording = false
-		fetchRecordings()
+		self.sleepStopTime = Date()
+//		fetchRecordings()
 	}
 	
-	
-	func fetchRecordings() {
-		recordings.removeAll()
+	func getfileName() -> String{
 		
 		let fileManager = FileManager.default
 		let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
 		let directoryContents = try! fileManager.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
-		for audio in directoryContents {
-			let creationDateTime = getCreationDate(for: audio)
-			let recording = Recording(fileURL: audio, createdAt: creationDateTime)
-			let displayRecording = DisplayRecording(displayCreationDate: getDisplayDate(for: creationDateTime), createdAt: creationDateTime)
-			recordings.append(recording)
-			recordingsForDisaply.append(displayRecording)
+		//		for audio in directoryContents {
+		let creationDateTime = getCreationDate(for: directoryContents[0])
+		//			let recording = Recording(fileURL: audio, createdAt: creationDateTime)
+		let displayRecording = DisplayRecording(displayCreationDate: getDisplayDate(for: creationDateTime), createdAt: creationDateTime)
+		recordingsForDisaply.append(displayRecording)
+		return displayRecording.displayCreationDate
+	}
+	
+	
+	func saveToCoreData(survey: Int16){
+		
+		let sleep = Sleep(context: moc)
+		sleep.uuid = UUID()
+		sleep.sleepFileName = getfileName()
+		sleep.sleepScore = calculateSleepScore(survey: survey, soundDB: self.soundDb)
+		sleep.sleepStartTime = sleepStartTime
+		sleep.sleepStopTime = sleepStopTime
+		do {
+			try sleep.soundDb = try NSKeyedArchiver.archivedData(withRootObject: soundDb ?? [0.0], requiringSecureCoding: true)
+			print("Successfully saved..")
+		}
+		catch {
+			print("Unexpected error: \(error).")
+		}
+		sleep.survey = survey
+		
+		do {
+			try moc.save()
+			print("Sucessfully saved sleeep data")
+		} catch {
+			print("Unexpected error saving sleep data: \(error).")
+		}
+	}
+	
+	
+	func calculateSleepScore(survey: Int16, soundDB: [Float]) -> Float {
+		let filteredDb = sleepDBFilter(soundDB: soundDB)
+		let filteredDBCount = filteredDb.count
+		var totalDB = filteredDb.reduce(0, +) * -1
+		if filteredDBCount == 0 {
+			totalDB = 0
+		}
+		let finalSleepScore = totalDB + Float(survey * 20)
+		return finalSleepScore
+	}
+	
+	
+	func sleepDBFilter(soundDB: [Float]) -> [Float] {
+		var filteredSleepDB = [Float]()
+		
+		for db in soundDB {
+			if db > -80 && db < -20 {
+				filteredSleepDB.append(db)
+			}
 		}
 		
-		recordings.sort(by: {$0.createdAt.compare($1.createdAt) == .orderedAscending})
-		recordingsForDisaply.sort(by: {$0.createdAt.compare($1.createdAt) == .orderedAscending})
-		objectWillChange.send(self)
+		return filteredSleepDB
 	}
 	
 	
-	func saveToCoreData(survey: Int8) -> String {
-		print("This is the survey : ", survey)
-		return "Hello"
-	}
+//	func unarchiveSleepDB() -> [String] {
+//		let sleep = Sleep(context: moc)
+//
+//		if let sleep = sleep.soundDb {
+//		  do {
+//			if let sleepDBArray = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: sleep) as? [String] {
+//			  dump(sleepDBArray)
+//				return sleepDBArray
+//			}
+//		  } catch {
+//			print("could not unarchive array: \(error)")
+//		  }
+//		}
+//		return []
+//	}
+	
+	
+//	func fetchRecordings() {
+//		recordings.removeAll()
+//
+//		let fileManager = FileManager.default
+//		let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+//		let directoryContents = try! fileManager.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
+//		for audio in directoryContents {
+//			let creationDateTime = getCreationDate(for: audio)
+//			let recording = Recording(fileURL: audio, createdAt: creationDateTime)
+//			let displayRecording = DisplayRecording(displayCreationDate: getDisplayDate(for: creationDateTime), createdAt: creationDateTime)
+//			recordings.append(recording)
+//			recordingsForDisaply.append(displayRecording)
+//		}
+//
+//		recordings.sort(by: {$0.createdAt.compare($1.createdAt) == .orderedAscending})
+//		recordingsForDisaply.sort(by: {$0.createdAt.compare($1.createdAt) == .orderedAscending})
+//		objectWillChange.send(self)
+//	}
+//
+	
+	
 }
 

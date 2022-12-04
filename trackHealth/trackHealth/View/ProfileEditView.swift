@@ -119,6 +119,7 @@ struct ProfileEditView: View {
 							}
 						dismiss()
 					}
+					.foregroundColor(disableForm ? .white : .green)
 					.disabled(disableForm)
 				}
 			}
@@ -127,7 +128,7 @@ struct ProfileEditView: View {
 	
 	
 	var disableForm: Bool {
-		if (checkIfEmpty() == true) && (checkIfNumber(input: age) && checkIfNumber(input: height) && checkIfNumber(input: weight)) {
+		if (checkIfEmpty()) || !(checkIfNumber(input: age) || checkIfNumber(input: height) || checkIfNumber(input: weight)) {
 			return true
 		}
 		return false
@@ -135,7 +136,7 @@ struct ProfileEditView: View {
 	
 	
 	func checkIfEmpty() -> Bool {
-		if (displayName.isEmpty && age.isEmpty && height.isEmpty && weight.isEmpty) {
+		if (displayName.isEmpty || age.isEmpty || height.isEmpty || weight.isEmpty) {
 			return true
 		}
 		else {

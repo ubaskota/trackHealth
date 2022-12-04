@@ -10,8 +10,9 @@ import SwiftUI
 
 struct SleepRecordSurveyView: View {
 	
+	@Environment(\.managedObjectContext) var moc
 	var recordMessage: String
-	@State var survey: Int8
+	@State var survey: Int16
 	@ObservedObject var audioRecorder: AudioRecorder
 	@State var showAlert: Bool
 	
@@ -59,7 +60,7 @@ struct SleepRecordSurveyView: View {
 
 
 struct RatingView: View {
-	@Binding var rating: Int8
+	@Binding var rating: Int16
 	
 	var label = ""
 	var maximumRating = 5
@@ -79,7 +80,7 @@ struct RatingView: View {
 				image(for: number)
 					.foregroundColor(number > rating ? offColor : onColor)
 					.onTapGesture {
-						rating = Int8(number)
+						rating = Int16(number)
 					}
 			}
 		}

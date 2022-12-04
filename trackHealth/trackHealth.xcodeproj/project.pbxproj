@@ -35,6 +35,7 @@
 		0C875302292837B60080228F /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C875301292837B60080228F /* ReviewView.swift */; };
 		0CCB2EEA29396C3E0055BCA7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCB2EE929396C3E0055BCA7 /* LoginView.swift */; };
 		0CD68A5C293B05DC00FA6A40 /* SleepRecordSurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD68A5B293B05DC00FA6A40 /* SleepRecordSurveyView.swift */; };
+		0CD68A5E293B19D500FA6A40 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD68A5D293B19D500FA6A40 /* TestView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		0C875301292837B60080228F /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		0CCB2EE929396C3E0055BCA7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		0CD68A5B293B05DC00FA6A40 /* SleepRecordSurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepRecordSurveyView.swift; sourceTree = "<group>"; };
+		0CD68A5D293B19D500FA6A40 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				0C7ACDBE2921EE6B009C32C8 /* ProfileEditView.swift */,
 				0C4014F52931B6B200CCF391 /* RecordingListView.swift */,
 				0CCB2EE929396C3E0055BCA7 /* LoginView.swift */,
+				0CD68A5D293B19D500FA6A40 /* TestView.swift */,
 				0C465A6B29343B09006392B0 /* RecordedDetailView.swift */,
 			);
 			path = View;
@@ -273,6 +276,7 @@
 				0C8752FC292803250080228F /* HealthData.xcdatamodeld in Sources */,
 				0C03B2E02849A69000CBEEBA /* SleepView.swift in Sources */,
 				0C8752F92922B8ED0080228F /* ProfileDetails.swift in Sources */,
+				0CD68A5E293B19D500FA6A40 /* TestView.swift in Sources */,
 				0C03B2C2283F1CE500CBEEBA /* trackHealthApp.swift in Sources */,
 				0C4014F82931BC2E00CCF391 /* Date-Extension.swift in Sources */,
 			);
