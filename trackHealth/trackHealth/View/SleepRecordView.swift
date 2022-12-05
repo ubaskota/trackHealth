@@ -72,7 +72,7 @@ struct SleepRecordView: View {
 						case 1:
 							SleepRecordTopView(recordMessage: "Recording has started! Recording.......")
 						case 2:
-							NavigationLink(destination: SleepRecordSurveyView(recordMessage: "You've stopped your recording", survey: 1, audioRecorder: AudioRecorder(), showAlert: false), isActive: self.$displaySurveyView) { EmptyView() }
+							NavigationLink(destination: SleepRecordSurveyView(recordMessage: "You've stopped your recording", survey: 1, audioRecorder: self.audioRecorder, showAlert: false), isActive: self.$displaySurveyView) { EmptyView() }
 						default:
 							SleepRecordTopView(recordMessage: "Recording isn't started. Press the red button to start.")
 						}

@@ -18,7 +18,10 @@ struct ReviewView: View {
 
 		List(sleepInfo){ pInfo in
 			Text(String(pInfo.survey) ?? "Geda")
-			
+			Text(String(pInfo.sleepScore) ?? "Geda")
+			Text(pInfo.sleepStartTime!, style: .time)
+			Text(pInfo.sleepStopTime!, style: .time)
+			Text(String(pInfo.sleepFileName ?? "Geda"))
 			
 //			ForEach(profileInfo) { pInfo in
 //				VStack {

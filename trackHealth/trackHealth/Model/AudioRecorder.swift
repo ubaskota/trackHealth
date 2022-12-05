@@ -72,11 +72,11 @@ class AudioRecorder: NSObject, ObservableObject {
 			audioRecorder.isMeteringEnabled = true
 			recording = true
 			
-			Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [self] timer in
+			Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [self] timer in
 				self.audioRecorder.updateMeters()
 				let db = audioRecorder.averagePower(forChannel: 0)
-				soundDb.append(db)
-//				print(soundDb)
+				self.soundDb.append(db)
+				print(self.soundDb)
 			}
 		} catch {
 			print("Could not start recording")
@@ -101,9 +101,11 @@ class AudioRecorder: NSObject, ObservableObject {
 	func stopRecording() {
 		audioRecorder.stop()
 		recording = false
+		print(self.soundDb)
 		self.sleepStopTime = Date()
 //		fetchRecordings()
 	}
+	
 	
 	func getfileName() -> String{
 		
@@ -124,11 +126,12 @@ class AudioRecorder: NSObject, ObservableObject {
 		let sleep = Sleep(context: moc)
 		sleep.uuid = UUID()
 		sleep.sleepFileName = getfileName()
-		sleep.sleepScore = calculateSleepScore(survey: survey, soundDB: self.soundDb)
+//		sleep.sleepScore = calculateSleepScore(survey: survey, soundDB: soundDb)
+		sleep.sleepScore = calculateSleepScore(survey: survey)
 		sleep.sleepStartTime = sleepStartTime
 		sleep.sleepStopTime = sleepStopTime
 		do {
-			try sleep.soundDb = try NSKeyedArchiver.archivedData(withRootObject: soundDb ?? [0.0], requiringSecureCoding: true)
+			try sleep.soundDb = try NSKeyedArchiver.archivedData(withRootObject: self.soundDb ?? [0.0], requiringSecureCoding: true)
 			print("Successfully saved..")
 		}
 		catch {
@@ -145,8 +148,11 @@ class AudioRecorder: NSObject, ObservableObject {
 	}
 	
 	
-	func calculateSleepScore(survey: Int16, soundDB: [Float]) -> Float {
-		let filteredDb = sleepDBFilter(soundDB: soundDB)
+//	func calculateSleepScore(survey: Int16, soundDB: [Float]) -> Float {
+	func calculateSleepScore(survey: Int16) -> Float {
+//		let filteredDb = sleepDBFilter(soundDB: soundDB)
+		let filteredDb = sleepDBFilter()
+		print(filteredDb)
 		let filteredDBCount = filteredDb.count
 		var totalDB = filteredDb.reduce(0, +) * -1
 		if filteredDBCount == 0 {
@@ -157,15 +163,19 @@ class AudioRecorder: NSObject, ObservableObject {
 	}
 	
 	
-	func sleepDBFilter(soundDB: [Float]) -> [Float] {
+//	func sleepDBFilter(soundDB: [Float]) -> [Float] {
+	func sleepDBFilter() -> [Float] {
 		var filteredSleepDB = [Float]()
 		
-		for db in soundDB {
-			if db > -80 && db < -20 {
+		for db in self.soundDb {
+			if db > -35 {
 				filteredSleepDB.append(db)
 			}
+//			if db < 0 {
+//				filteredSleepDB.append(db)
+//			}
 		}
-		
+		print(self.soundDb)
 		return filteredSleepDB
 	}
 	

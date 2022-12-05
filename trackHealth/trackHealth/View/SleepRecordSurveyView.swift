@@ -52,7 +52,6 @@ struct SleepRecordSurveyView: View {
 				})
 				)
 			}
-			
 		}
 		.navigationBarBackButtonHidden(true)
 	}
