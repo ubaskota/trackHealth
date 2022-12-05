@@ -62,8 +62,13 @@ struct FoodView: View {
 					.fontWeight(.bold)
 					.font(.title)
 					.font(.system(size: 20))
-					.foregroundColor(.gray)
+					.foregroundColor(.green)
 			}
+			.padding(.vertical)
+			.frame(maxWidth: 430, maxHeight: 80)
+			.scaledToFill()
+			.background(.lightBackground)
+			
 			NavigationView {
 				VStack (spacing: 30) {
 					List {
@@ -80,12 +85,14 @@ struct FoodView: View {
 						}
 						.onDelete(perform: removeItems)
 					}
-					
 					.toolbar {
 						Button {
 							showingAddMeal = true
 						} label : {
 							Image(systemName: "plus")
+								.renderingMode(.original) // <1>
+								.font(.system(size: 60))
+								.foregroundColor(Color(.systemRed))
 						}
 					}
 					.sheet(isPresented: $showingAddMeal) {

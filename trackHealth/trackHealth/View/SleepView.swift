@@ -13,7 +13,6 @@ struct SleepView: View {
 	let textOptions: [String: String] = ["sleep_record":"Record", "sleep_history": "Results"]
 	
 	var body: some View {
-		NavigationView {
 		ScrollView {
 				ForEach(viewOptions, id: \.self) { topic in
 					NavigationLink {
@@ -48,7 +47,6 @@ struct SleepView: View {
 				.padding([.horizontal, .bottom])
 				.background(.white)
 			}
-		}
 	}
 }
 

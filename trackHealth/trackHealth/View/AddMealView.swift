@@ -24,36 +24,62 @@ struct AddMealView: View {
 		
 		NavigationView {
 			Form {
-				Section(header: Text("MEAL TYPE")) {
-					Picker("Meal", selection: $mealType) {
-						ForEach(meals, id: \.self) {
-							Text($0)
-						}
+//				Text("Add the meal type")
+//					.font(.system(size: 25, weight: .bold, design: .default)).foregroundColor(Color.green)
+//					.padding([.top, .bottom])
+//
+				Picker("Meal", selection: $mealType) {
+					ForEach(meals, id: \.self) {
+						Text($0)
 					}
 				}
+				.font(.system(size: 20, weight: .bold, design: .default)).foregroundColor(Color.green)
 				
-				Section(header: Text("Add All the Foods")) {
-					TextField("Food One", text: $foodOne)
-					TextField("Food Two", text: $foodTwo)
-					TextField("Food Three", text: $foodThree)
-					TextField("Food Four", text: $foodFour)
-				}
 				
-				Section(header: Text("Total Calories")) {
-					TextField("Total Calories", value: $total_calories, formatter: NumberFormatter())
-						.keyboardType(.decimalPad)
-				}
+				Text("Add All the Foods")
+					.font(.system(size: 25, weight: .bold, design: .default)).foregroundColor(Color.green)
+					.padding([.top, .bottom])
+				TextField("Food One", text: $foodOne)
+					.padding()
+					.cornerRadius(20)
+				TextField("Food Two", text: $foodTwo)
+					.padding()
+					.cornerRadius(20)
+				TextField("Food Three", text: $foodThree)
+					.padding()
+					.cornerRadius(20)
+				TextField("Food Four", text: $foodFour)
+					.padding()
+					.cornerRadius(20)
+				
+				Text("Total Calories")
+					.font(.system(size: 25, weight: .bold, design: .default)).foregroundColor(Color.green)
+					.padding([.top, .bottom])
+				
+				TextField("Total Calories", value: $total_calories, formatter: NumberFormatter())
+					.keyboardType(.decimalPad)
+					.padding()
+					.cornerRadius(20)
 			}
-			.navigationTitle("Add Your Meals")
 			.toolbar {
 				Button("ADD") {
 					let item = MealItem(mealType: mealType, foodOne: foodOne, foodTwo: foodTwo, foodThree: foodThree, foodFour: foodFour, totalCalories: Int(total_calories))
 					allMeal_details.items.append(item)
 					dismiss()
 				}
+				.font(.system(size: 20, weight: .bold, design: .default))
+				.foregroundColor(disableForm ? .white : .green)
+				.disabled(disableForm)
 			}
 		}
     }
+	
+	var disableForm: Bool {
+		if (foodOne.isEmpty) || (foodOne.count < 3) || (total_calories <= 0) {
+			return true
+		}
+		return false
+	}
 }
 
 
