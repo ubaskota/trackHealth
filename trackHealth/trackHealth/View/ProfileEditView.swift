@@ -11,15 +11,9 @@ import Foundation
 struct ProfileEditView: View {
 	
 	@Environment(\.managedObjectContext) var moc
-	
 	@Environment(\.dismiss) var dismiss
-	
-	
-	
 	let races = ["Asian", "Black", "South Asian", "White", "Hispanic", "American Indian", "Other"]
-	
 	let conditions = ["Yes", "No"]
-	
 	let genders = ["Male", "Female", "Other"]
 	
 	@State private var displayName = ""

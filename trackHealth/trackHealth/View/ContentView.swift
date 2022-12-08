@@ -15,16 +15,16 @@ struct ContentView: View {
 	let mainTopics: [String] = ["Food", "Workout", "Sleep", "Review"]
 	var topicImage : [String: String] = ["food": "foodImg", "Workout": "workoutImg", "Sleep": "sleepImg", "Review": "reviewImg"]
 	
-	@ViewBuilder
-    var body: some View {
+
+	var body: some View {
 		NavigationView {
 			ScrollView {
 				ForEach(mainTopics, id: \.self) { topic in
 					
 					NavigationLink {
 						switch topic {
-						case "Food":
-							FoodView()
+//						case "Food":
+//							FoodView(mealItem: MealItem())
 						case "Workout":
 							WorkoutView()
 						case "Sleep":
@@ -32,7 +32,7 @@ struct ContentView: View {
 						case "Review":
 							ReviewView()
 						default:
-							FoodView()
+							FoodView(mealItem: MealItem())
 						}
 					} label: {
 					VStack {
@@ -70,12 +70,6 @@ struct ContentView: View {
 						.font(.system(size: 20, weight: Font.Weight.bold))
 						.foregroundColor(Color.green)
 				}
-				
-//				ToolbarItem(placement: .navigationBarTrailing) {
-//					Button("signin") {}
-//						.font(.system(size: 20, weight: Font.Weight.bold))
-//						.foregroundColor(Color.green)
-//				}
 			}
 			.navigationTitle("Track-Health")
 		}

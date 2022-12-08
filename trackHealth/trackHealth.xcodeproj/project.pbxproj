@@ -26,11 +26,12 @@
 		0C465A6A29341FB8006392B0 /* AudioDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C465A6929341FB8006392B0 /* AudioDisplay.swift */; };
 		0C465A6C29343B09006392B0 /* RecordedDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C465A6B29343B09006392B0 /* RecordedDetailView.swift */; };
 		0C465AAC2936F66E006392B0 /* SleepRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C465AAB2936F66E006392B0 /* SleepRecordView.swift */; };
-		0C465AAE2936F88F006392B0 /* SleepHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C465AAD2936F88F006392B0 /* SleepHistoryView.swift */; };
+		0C49455A293FB1E400175670 /* SleepHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C494559293FB1E400175670 /* SleepHistory.swift */; };
+		0C49455D293FBF1800175670 /* HealthData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0C49455B293FBF1800175670 /* HealthData.xcdatamodeld */; };
+		0C494562293FE41F00175670 /* SleepResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C494561293FE41F00175670 /* SleepResultView.swift */; };
 		0C7ACDBF2921EE6C009C32C8 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7ACDBE2921EE6B009C32C8 /* ProfileEditView.swift */; };
 		0C8752F72922B7210080228F /* ProfileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8752F62922B7210080228F /* ProfileItem.swift */; };
 		0C8752F92922B8ED0080228F /* ProfileDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8752F82922B8ED0080228F /* ProfileDetails.swift */; };
-		0C8752FC292803250080228F /* HealthData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0C8752FA292803240080228F /* HealthData.xcdatamodeld */; };
 		0C8752FE292807200080228F /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8752FD292807200080228F /* DataController.swift */; };
 		0C875302292837B60080228F /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C875301292837B60080228F /* ReviewView.swift */; };
 		0CCB2EEA29396C3E0055BCA7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCB2EE929396C3E0055BCA7 /* LoginView.swift */; };
@@ -59,11 +60,12 @@
 		0C465A6929341FB8006392B0 /* AudioDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDisplay.swift; sourceTree = "<group>"; };
 		0C465A6B29343B09006392B0 /* RecordedDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordedDetailView.swift; sourceTree = "<group>"; };
 		0C465AAB2936F66E006392B0 /* SleepRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepRecordView.swift; sourceTree = "<group>"; };
-		0C465AAD2936F88F006392B0 /* SleepHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepHistoryView.swift; sourceTree = "<group>"; };
+		0C494559293FB1E400175670 /* SleepHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepHistory.swift; sourceTree = "<group>"; };
+		0C49455C293FBF1800175670 /* HealthData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HealthData.xcdatamodel; sourceTree = "<group>"; };
+		0C494561293FE41F00175670 /* SleepResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SleepResultView.swift; path = trackHealth/SleepResultView.swift; sourceTree = SOURCE_ROOT; };
 		0C7ACDBE2921EE6B009C32C8 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		0C8752F62922B7210080228F /* ProfileItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileItem.swift; sourceTree = "<group>"; };
 		0C8752F82922B8ED0080228F /* ProfileDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetails.swift; sourceTree = "<group>"; };
-		0C8752FB292803250080228F /* HealthData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HealthData.xcdatamodel; sourceTree = "<group>"; };
 		0C8752FD292807200080228F /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		0C875301292837B60080228F /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		0CCB2EE929396C3E0055BCA7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -101,11 +103,11 @@
 		0C03B2C0283F1CE500CBEEBA /* trackHealth */ = {
 			isa = PBXGroup;
 			children = (
+				0C49455B293FBF1800175670 /* HealthData.xcdatamodeld */,
 				0C03B2C1283F1CE500CBEEBA /* trackHealthApp.swift */,
 				0C09D241293825000062C553 /* RecordHelper.swift */,
 				0C4014EF29312F5A00CCF391 /* View */,
 				0C4014F029312F9900CCF391 /* Controller */,
-				0C8752FA292803240080228F /* HealthData.xcdatamodeld */,
 				0C4014EE29312F2D00CCF391 /* Model */,
 				0C4014F229312FF200CCF391 /* Extension */,
 				0C4014F129312FBC00CCF391 /* Resources */,
@@ -132,6 +134,7 @@
 				0C03B2D528470A6400CBEEBA /* MealItem.swift */,
 				0C4014F329318D8100CCF391 /* AudioRecorder.swift */,
 				0C465A6929341FB8006392B0 /* AudioDisplay.swift */,
+				0C494559293FB1E400175670 /* SleepHistory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -139,9 +142,9 @@
 		0C4014EF29312F5A00CCF391 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0C494561293FE41F00175670 /* SleepResultView.swift */,
 				0C03B2E12849A6A000CBEEBA /* WorkoutView.swift */,
 				0C03B2DF2849A69000CBEEBA /* SleepView.swift */,
-				0C465AAD2936F88F006392B0 /* SleepHistoryView.swift */,
 				0C465AAB2936F66E006392B0 /* SleepRecordView.swift */,
 				0CD68A5B293B05DC00FA6A40 /* SleepRecordSurveyView.swift */,
 				0C03B2C3283F1CE500CBEEBA /* ContentView.swift */,
@@ -270,15 +273,16 @@
 				0C03B2DC2848589B00CBEEBA /* MealDetails.swift in Sources */,
 				0C03B2D0283F2FD800CBEEBA /* Color-Theme.swift in Sources */,
 				0C875302292837B60080228F /* ReviewView.swift in Sources */,
-				0C465AAE2936F88F006392B0 /* SleepHistoryView.swift in Sources */,
 				0C4014F62931B6B200CCF391 /* RecordingListView.swift in Sources */,
+				0C49455A293FB1E400175670 /* SleepHistory.swift in Sources */,
 				0C465A6A29341FB8006392B0 /* AudioDisplay.swift in Sources */,
-				0C8752FC292803250080228F /* HealthData.xcdatamodeld in Sources */,
 				0C03B2E02849A69000CBEEBA /* SleepView.swift in Sources */,
+				0C49455D293FBF1800175670 /* HealthData.xcdatamodeld in Sources */,
 				0C8752F92922B8ED0080228F /* ProfileDetails.swift in Sources */,
 				0CD68A5E293B19D500FA6A40 /* TestView.swift in Sources */,
 				0C03B2C2283F1CE500CBEEBA /* trackHealthApp.swift in Sources */,
 				0C4014F82931BC2E00CCF391 /* Date-Extension.swift in Sources */,
+				0C494562293FE41F00175670 /* SleepResultView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,12 +487,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		0C8752FA292803240080228F /* HealthData.xcdatamodeld */ = {
+		0C49455B293FBF1800175670 /* HealthData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				0C8752FB292803250080228F /* HealthData.xcdatamodel */,
+				0C49455C293FBF1800175670 /* HealthData.xcdatamodel */,
 			);
-			currentVersion = 0C8752FB292803250080228F /* HealthData.xcdatamodel */;
+			currentVersion = 0C49455C293FBF1800175670 /* HealthData.xcdatamodel */;
 			path = HealthData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

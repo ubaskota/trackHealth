@@ -8,20 +8,26 @@
 import SwiftUI
 
 struct ReviewView: View {
-	@Environment(\.managedObjectContext) var moc
+//	@Environment(\.managedObjectContext) var moc
 //	@FetchRequest(sortDescriptors: []) var profileInfo: FetchedResults<Profile>
 	@FetchRequest(sortDescriptors: []) var sleepInfo: FetchedResults<Sleep>
+//	@FetchRequest(entity: Meal.entity(), sortDescriptors: []) var mealInfo: FetchedResults<Meal>
 	
     var body: some View {
 		Text("Lamo Kera")
+//		List(mealInfo) { mInfo in
+//			Text(mInfo.foodOne!)
+//		}
+		
 //		let sleepDB = audioRecorder.unarchiveSleepDB()
 
 		List(sleepInfo){ pInfo in
-			Text(String(pInfo.survey) ?? "Geda")
-			Text(String(pInfo.sleepScore) ?? "Geda")
+			Text(String(pInfo.survey))
+			Text(String(pInfo.sleepScore))
 			Text(pInfo.sleepStartTime!, style: .time)
 			Text(pInfo.sleepStopTime!, style: .time)
-			Text(String(pInfo.sleepFileName ?? "Geda"))
+			Text(pInfo.sleepFileName!)
+		}
 			
 //			ForEach(profileInfo) { pInfo in
 //				VStack {
@@ -33,26 +39,26 @@ struct ReviewView: View {
 //			}
 		}
 //		Text("This is sleepdb: \(sleepDB)")
-    }
+	}
 	
 
-	func unarchiveSleepDB() -> [String] {
-		let sleep = Sleep(context: moc)
+//	func unarchiveSleepDB() -> [String] {
+//		let sleep = Sleep(context: moc)
+//
+//		if let sleep = sleep.soundDb {
+//		  do {
+//			if let sleepDBArray = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: sleep) as? [String] {
+//			  dump(sleepDBArray)
+//				return sleepDBArray
+//			}
+//		  } catch {
+//			print("could not unarchive array: \(error)")
+//		  }
+//		}
+//		return []
+//	}
 
-		if let sleep = sleep.soundDb {
-		  do {
-			if let sleepDBArray = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: sleep) as? [String] {
-			  dump(sleepDBArray)
-				return sleepDBArray
-			}
-		  } catch {
-			print("could not unarchive array: \(error)")
-		  }
-		}
-		return []
-	}
-
-}
+//}
 
 struct ReviewView_Previews: PreviewProvider {
     static var previews: some View {

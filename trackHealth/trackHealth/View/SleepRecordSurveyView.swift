@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SleepRecordSurveyView: View {
 	
-	@Environment(\.managedObjectContext) var moc
+//	@Environment(\.managedObjectContext) var moc
 	var recordMessage: String
 	@State var survey: Int16
 	@ObservedObject var audioRecorder: AudioRecorder

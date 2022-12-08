@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct TestRow: View {
 	var arg1: String = ""
@@ -51,7 +52,9 @@ struct FoodView: View {
 	
 	@State private var selection: String? = nil
 	@State private var showingAddMeal = false
-	@StateObject var allMeal_details = MealDetails()
+//	@StateObject var allMeal_details = MealDetails()
+	@ObservedObject var mealItem: MealItem
+//	@FetchRequest(entity: Meal.entity(), sortDescriptors: []) var mealInfo: FetchedResults<Meal>
 	var bColor = "green"
 	
     var body: some View {
@@ -71,20 +74,27 @@ struct FoodView: View {
 			
 			NavigationView {
 				VStack (spacing: 30) {
-					List {
-						ForEach(allMeal_details.items) { item in
-							HStack {
-								VStack(alignment: .leading) {
-									Text(item.mealType)
-										.font(.headline)
-									HStack {
-										TestRow(arg1: item.foodOne, arg2: item.foodTwo ?? "", arg3: item.foodThree ?? "", arg4: item.foodFour ?? "", arg5: item.totalCalories)
-									}
-								}
-							}
-						}
-						.onDelete(perform: removeItems)
-					}
+//					List {
+					Text("Your average calorie intake so far: ")
+					Text("Breakfast : \(mealItem.getAverageCalorie(mealType: "Breakfast")) Calories")
+					Text("Lunch : \(mealItem.getAverageCalorie(mealType: "Lunch")) Calories")
+					Text("Dinner : \(mealItem.getAverageCalorie(mealType: "Dinner")) Calories")
+					Text("Snacks : \(mealItem.getAverageCalorie(mealType: "Snacks")) Calories")
+						
+
+//						ForEach(allMeal_details.items) { item in
+//							HStack {
+//								VStack(alignment: .leading) {
+//									Text(item.mealType)
+//										.font(.headline)
+//									HStack {
+//										TestRow(arg1: item.foodOne, arg2: item.foodTwo ?? "", arg3: item.foodThree ?? "", arg4: item.foodFour ?? "", arg5: item.totalCalories)
+//									}
+//								}
+//							}
+//						}
+//						.onDelete(perform: removeItems)
+//					}
 					.toolbar {
 						Button {
 							showingAddMeal = true
@@ -96,7 +106,8 @@ struct FoodView: View {
 						}
 					}
 					.sheet(isPresented: $showingAddMeal) {
-						AddMealView(allMeal_details: allMeal_details)
+						AddMealView()
+//						AddMealView(allMeal_details: allMeal_details)
 					}
 				}
 			}
@@ -115,16 +126,16 @@ struct FoodView: View {
 
     }
 	
-	func removeItems(at offsets: IndexSet) {
-		allMeal_details.items.remove(atOffsets: offsets)
-	}
+//	func removeItems(at offsets: IndexSet) {
+//		allMeal_details.items.remove(atOffsets: offsets)
+//	}
 }
 
 
 
 struct FoodView_Previews: PreviewProvider {
     static var previews: some View {
-        FoodView()
+        FoodView(mealItem: MealItem())
     }
 }
 

@@ -158,7 +158,7 @@ class AudioRecorder: NSObject, ObservableObject {
 		if filteredDBCount == 0 {
 			totalDB = 0
 		}
-		let finalSleepScore = totalDB + Float(survey * 20)
+		let finalSleepScore = (totalDB / Float(filteredDBCount)) + Float(survey * 20)
 		return finalSleepScore
 	}
 	

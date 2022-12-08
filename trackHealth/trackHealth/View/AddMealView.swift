@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct AddMealView: View {
-	@ObservedObject var allMeal_details: MealDetails
+//	@ObservedObject var allMeal_details: MealDetails
 	@Environment(\.dismiss) var dismiss
+	@Environment(\.managedObjectContext) var moc
 	
 	@State private var mealType = ""
 	let meals = ["Breakfast", "Lunch", "Dinner", "Snacks"]
@@ -18,7 +19,7 @@ struct AddMealView: View {
 	@State private var foodTwo = ""
 	@State private var foodThree = ""
 	@State private var foodFour = ""
-	@State private var total_calories = 0.0
+	@State private var total_calories = 0
 	
     var body: some View {
 		
@@ -63,8 +64,23 @@ struct AddMealView: View {
 			}
 			.toolbar {
 				Button("ADD") {
-					let item = MealItem(mealType: mealType, foodOne: foodOne, foodTwo: foodTwo, foodThree: foodThree, foodFour: foodFour, totalCalories: Int(total_calories))
-					allMeal_details.items.append(item)
+//					let item = MealItem(mealType: mealType, foodOne: foodOne, foodTwo: foodTwo, foodThree: foodThree, foodFour: foodFour, totalCalories: Int(total_calories))
+//					allMeal_details.items.append(item)
+					let meal = Meal(context: moc)
+					meal.uuid = UUID()
+					meal.mealType = mealType
+					meal.foodOne = foodOne
+					meal.foodTwo = foodTwo
+					meal.foodThree = foodThree
+					meal.foodFour = foodFour
+					meal.totalCalories = Float(total_calories)
+					do {
+						try moc.save()
+							print("Successfully saved meals...")
+					} catch {
+						print("Unexpected error in meal adddition: \(error).")
+					}
+					
 					dismiss()
 				}
 				.font(.system(size: 20, weight: .bold, design: .default))
@@ -85,6 +101,7 @@ struct AddMealView: View {
 
 struct AddMealView_Previews: PreviewProvider {
     static var previews: some View {
-		AddMealView(allMeal_details: MealDetails())
+		AddMealView()
+//		AddMealView(allMeal_details: MealDetails())
     }
 }
