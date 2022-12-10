@@ -10,9 +10,11 @@ import SwiftUI
 struct AddMealView: View {
 //	@ObservedObject var allMeal_details: MealDetails
 	@Environment(\.dismiss) var dismiss
-	@Environment(\.managedObjectContext) var moc
+//	@Environment(\.managedObjectContext) var moc
 	
-	@State private var mealType = ""
+	var mealItem: MealItem
+	
+	@State private var mealType = "Breakfast"
 	let meals = ["Breakfast", "Lunch", "Dinner", "Snacks"]
 	
 	@State private var foodOne = ""
@@ -66,21 +68,23 @@ struct AddMealView: View {
 				Button("ADD") {
 //					let item = MealItem(mealType: mealType, foodOne: foodOne, foodTwo: foodTwo, foodThree: foodThree, foodFour: foodFour, totalCalories: Int(total_calories))
 //					allMeal_details.items.append(item)
-					let meal = Meal(context: moc)
-					meal.uuid = UUID()
-					meal.mealType = mealType
-					meal.foodOne = foodOne
-					meal.foodTwo = foodTwo
-					meal.foodThree = foodThree
-					meal.foodFour = foodFour
-					meal.totalCalories = Float(total_calories)
-					do {
-						try moc.save()
-							print("Successfully saved meals...")
-					} catch {
-						print("Unexpected error in meal adddition: \(error).")
-					}
 					
+					
+//					let meal = Meal(context: moc)
+//					meal.uuid = UUID()
+//					meal.mealType = mealType
+//					meal.foodOne = foodOne
+//					meal.foodTwo = foodTwo
+//					meal.foodThree = foodThree
+//					meal.foodFour = foodFour
+//					meal.totalCalories = Float(total_calories)
+//					do {
+//						try moc.save()
+//							print("Successfully saved meals...")
+//					} catch {
+//						print("Unexpected error in meal adddition: \(error).")
+//					}
+					self.mealItem.saveMealToCoreData(mealType: mealType, foodOne: foodOne, foodTwo: foodTwo, foodThree: foodThree, foodFour: foodFour, totalCalories: Int32(total_calories))
 					dismiss()
 				}
 				.font(.system(size: 20, weight: .bold, design: .default))
@@ -101,7 +105,7 @@ struct AddMealView: View {
 
 struct AddMealView_Previews: PreviewProvider {
     static var previews: some View {
-		AddMealView()
+		AddMealView(mealItem: MealItem())
 //		AddMealView(allMeal_details: MealDetails())
     }
 }

@@ -15,7 +15,9 @@ class AudioRecorder: NSObject, ObservableObject {
 	
 //	@Environment(\.managedObjectContext) var moc
 //	var moc = PersistentController.shared.container.viewContext
-	var moc = DataController.init().container.viewContext
+//	var moc = DataController.init().container.viewContext
+	let coreDM: DataController = DataController.shared
+
 	
 	override init() {
 		super.init()
@@ -77,6 +79,9 @@ class AudioRecorder: NSObject, ObservableObject {
 				let db = audioRecorder.averagePower(forChannel: 0)
 				self.soundDb.append(db)
 				print(self.soundDb)
+				if recording == false{
+					timer.invalidate()
+				}
 			}
 		} catch {
 			print("Could not start recording")
@@ -121,31 +126,69 @@ class AudioRecorder: NSObject, ObservableObject {
 	}
 	
 	
-	func saveToCoreData(survey: Int16){
+	
+	func saveSleepToCoreData(survey: Int16){
 		
-		let sleep = Sleep(context: moc)
-		sleep.uuid = UUID()
-		sleep.sleepFileName = getfileName()
-//		sleep.sleepScore = calculateSleepScore(survey: survey, soundDB: soundDb)
-		sleep.sleepScore = calculateSleepScore(survey: survey)
-		sleep.sleepStartTime = sleepStartTime
-		sleep.sleepStopTime = sleepStopTime
-		do {
-			try sleep.soundDb = try NSKeyedArchiver.archivedData(withRootObject: self.soundDb ?? [0.0], requiringSecureCoding: true)
-			print("Successfully saved..")
-		}
-		catch {
-			print("Unexpected error: \(error).")
-		}
-		sleep.survey = survey
-		
-		do {
-			try moc.save()
-			print("Sucessfully saved sleeep data")
-		} catch {
-			print("Unexpected error saving sleep data: \(error).")
-		}
+		sleepFileName = getfileName()
+		sleepScore = calculateSleepScore(survey: survey)
+		coreDM.saveSleepDataToCoreData(survey: survey, fileName: sleepFileName, sleepScore: sleepScore, sleepStartTime: sleepStartTime, sleepStopTime: sleepStopTime, soundDb: soundDb)
 	}
+	
+	
+	func getSleepFromCoreData() -> [Sleep] {
+		return coreDM.getSleepDataFromCoreData()
+	}
+		
+//		let sleep = Sleep(context: moc)
+//		sleep.uuid = UUID()
+//		sleep.sleepFileName = getfileName()
+////		sleep.sleepScore = calculateSleepScore(survey: survey, soundDB: soundDb)
+//		sleep.sleepScore = calculateSleepScore(survey: survey)
+//		sleep.sleepStartTime = sleepStartTime
+//		sleep.sleepStopTime = sleepStopTime
+//		do {
+//			try sleep.soundDb = try NSKeyedArchiver.archivedData(withRootObject: self.soundDb ?? [0.0], requiringSecureCoding: true)
+//			print("Successfully saved..")
+//		}
+//		catch {
+//			print("Unexpected error: \(error).")
+//		}
+//		sleep.survey = survey
+//
+//		do {
+//			try moc.save()
+//			print("Sucessfully saved sleeep data")
+//		} catch {
+//			print("Unexpected error saving sleep data: \(error).")
+//		}
+//	}
+	
+
+//	func saveSleepToCoreData(survey: Int16){
+//
+//		let sleep = Sleep(context: moc)
+//		sleep.uuid = UUID()
+//		sleep.sleepFileName = getfileName()
+////		sleep.sleepScore = calculateSleepScore(survey: survey, soundDB: soundDb)
+//		sleep.sleepScore = calculateSleepScore(survey: survey)
+//		sleep.sleepStartTime = sleepStartTime
+//		sleep.sleepStopTime = sleepStopTime
+//		do {
+//			try sleep.soundDb = try NSKeyedArchiver.archivedData(withRootObject: self.soundDb ?? [0.0], requiringSecureCoding: true)
+//			print("Successfully saved..")
+//		}
+//		catch {
+//			print("Unexpected error: \(error).")
+//		}
+//		sleep.survey = survey
+//
+//		do {
+//			try moc.save()
+//			print("Sucessfully saved sleeep data")
+//		} catch {
+//			print("Unexpected error saving sleep data: \(error).")
+//		}
+//	}
 	
 	
 //	func calculateSleepScore(survey: Int16, soundDB: [Float]) -> Float {
@@ -216,7 +259,6 @@ class AudioRecorder: NSObject, ObservableObject {
 //		objectWillChange.send(self)
 //	}
 //
-	
-	
+
 }
 

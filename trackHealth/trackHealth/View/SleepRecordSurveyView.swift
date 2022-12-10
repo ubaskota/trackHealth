@@ -36,7 +36,7 @@ struct SleepRecordSurveyView: View {
 			.frame(width: 250, height: 20)
 			
 			Button(action: {
-				self.audioRecorder.saveToCoreData(survey: survey); showAlert = true
+				self.audioRecorder.saveSleepToCoreData(survey: survey); showAlert = true
 			}) {
 				Text("Submit Response")
 					.font(.headline)

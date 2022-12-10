@@ -11,16 +11,20 @@ import SwiftUI
 
 class MealItem: NSObject, ObservableObject {
 	
-	var moc = DataController.init().container.viewContext
-	@FetchRequest(entity: Meal.entity(), sortDescriptors: []) var mealInfo: FetchedResults<Meal>
+	//	var moc = DataController.init().container.viewContext
+//	@FetchRequest(entity: Meal.entity(), sortDescriptors: []) var mealInfo: FetchedResults<Meal>
+	
+	let coreDM: DataController = DataController.shared
 	
 	override init() {
 		super.init()
 	}
 	
+	
 	func getAverageCalorie(mealType: String) -> Float {
 		var averageBreakfastCalories = 0
 		var count = 1
+		let mealInfo = getMealFromCoreData()
 		for meal in mealInfo{
 			if meal.mealType == mealType {
 				averageBreakfastCalories += Int(meal.totalCalories)
@@ -28,5 +32,15 @@ class MealItem: NSObject, ObservableObject {
 			}
 		}
 		return Float(averageBreakfastCalories/count)
+	}
+	
+	
+	func saveMealToCoreData(mealType: String, foodOne: String, foodTwo: String, foodThree: String, foodFour: String, totalCalories: Int32) {
+		coreDM.saveMealDataToCoreData(mealType: mealType, foodOne: foodOne, foodTwo: foodTwo, foodThree: foodThree, foodFour: foodFour, totalCalories: totalCalories)
+	}
+	
+	
+	func getMealFromCoreData() -> [Meal] {
+		return coreDM.getMealDataFromCoreData()
 	}
 }

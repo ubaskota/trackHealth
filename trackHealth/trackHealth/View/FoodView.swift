@@ -58,7 +58,6 @@ struct FoodView: View {
 	var bColor = "green"
 	
     var body: some View {
-		
 		VStack {
 			VStack {
 				Text("Add your meal")
@@ -106,7 +105,7 @@ struct FoodView: View {
 						}
 					}
 					.sheet(isPresented: $showingAddMeal) {
-						AddMealView()
+						AddMealView(mealItem: MealItem())
 //						AddMealView(allMeal_details: allMeal_details)
 					}
 				}

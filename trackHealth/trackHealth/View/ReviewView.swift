@@ -8,38 +8,36 @@
 import SwiftUI
 
 struct ReviewView: View {
-//	@Environment(\.managedObjectContext) var moc
-//	@FetchRequest(sortDescriptors: []) var profileInfo: FetchedResults<Profile>
-	@FetchRequest(sortDescriptors: []) var sleepInfo: FetchedResults<Sleep>
-//	@FetchRequest(entity: Meal.entity(), sortDescriptors: []) var mealInfo: FetchedResults<Meal>
+	//	@Environment(\.managedObjectContext) var moc
+	//	@FetchRequest(sortDescriptors: []) var profileInfo: FetchedResults<Profile>
+	//	@FetchRequest(sortDescriptors: []) var sleepInfo: FetchedResults<Sleep>
+	//	@FetchRequest(entity: Meal.entity(), sortDescriptors: []) var mealInfo: FetchedResults<Meal>
+	@ObservedObject var mealItem: MealItem
 	
-    var body: some View {
+	var body: some View {
 		Text("Lamo Kera")
-//		List(mealInfo) { mInfo in
-//			Text(mInfo.foodOne!)
-//		}
+		//		List(mealInfo) { mInfo in
+		//			Text(mInfo.foodOne!)
+		//		}
 		
-//		let sleepDB = audioRecorder.unarchiveSleepDB()
-
-		List(sleepInfo){ pInfo in
-			Text(String(pInfo.survey))
-			Text(String(pInfo.sleepScore))
-			Text(pInfo.sleepStartTime!, style: .time)
-			Text(pInfo.sleepStopTime!, style: .time)
-			Text(pInfo.sleepFileName!)
-		}
+		//		let sleepDB = audioRecorder.unarchiveSleepDB()
+		
+		List(mealItem.getMealFromCoreData()){ pInfo in
+			Text(String(pInfo.foodOne!))
+			Text(String(pInfo.totalCalories))
 			
-//			ForEach(profileInfo) { pInfo in
-//				VStack {
-//					Text(pInfo.race ?? "Unknown")
-//						.font(.headline)
-//					Text("\(pInfo.weight)")
-//						.foregroundColor(.secondary)
-//				}
-//			}
+			//			ForEach(profileInfo) { pInfo in
+			//				VStack {
+			//					Text(pInfo.race ?? "Unknown")
+			//						.font(.headline)
+			//					Text("\(pInfo.weight)")
+			//						.foregroundColor(.secondary)
+			//				}
+			//			}
 		}
-//		Text("This is sleepdb: \(sleepDB)")
+		//		Text("This is sleepdb: \(sleepDB)")
 	}
+}
 	
 
 //	func unarchiveSleepDB() -> [String] {
@@ -62,6 +60,6 @@ struct ReviewView: View {
 
 struct ReviewView_Previews: PreviewProvider {
     static var previews: some View {
-        ReviewView()
+        ReviewView(mealItem: MealItem())
     }
 }

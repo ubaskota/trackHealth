@@ -15,7 +15,6 @@ struct ContentView: View {
 	let mainTopics: [String] = ["Food", "Workout", "Sleep", "Review"]
 	var topicImage : [String: String] = ["food": "foodImg", "Workout": "workoutImg", "Sleep": "sleepImg", "Review": "reviewImg"]
 	
-
 	var body: some View {
 		NavigationView {
 			ScrollView {
@@ -30,7 +29,7 @@ struct ContentView: View {
 						case "Sleep":
 							SleepView()
 						case "Review":
-							ReviewView()
+							ReviewView(mealItem: MealItem())
 						default:
 							FoodView(mealItem: MealItem())
 						}
@@ -65,7 +64,7 @@ struct ContentView: View {
 					}) {
 						Text("Profile")
 					}.sheet(isPresented: $showingProfile) {
-						ProfileEditView()
+						ProfileEditView(profileItem: ProfileItem())
 					}
 						.font(.system(size: 20, weight: Font.Weight.bold))
 						.foregroundColor(Color.green)
