@@ -11,9 +11,6 @@ import SwiftUI
 
 class MealItem: NSObject, ObservableObject {
 	
-	//	var moc = DataController.init().container.viewContext
-//	@FetchRequest(entity: Meal.entity(), sortDescriptors: []) var mealInfo: FetchedResults<Meal>
-	
 	let coreDM: DataController = DataController.shared
 	
 	override init() {

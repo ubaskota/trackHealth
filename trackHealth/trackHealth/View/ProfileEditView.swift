@@ -10,7 +10,6 @@ import Foundation
 
 struct ProfileEditView: View {
 	
-//	@Environment(\.managedObjectContext) var moc
 	@Environment(\.dismiss) var dismiss
 	var profileItem: ProfileItem
 	
@@ -85,38 +84,10 @@ struct ProfileEditView: View {
 						.frame(width: 100, height: 40)
 					}
 				}
-//				.navigationTitle("Add you details")
 				.toolbar {
 					Button("Save") {
-	//					let item = ProfileItem(id: UUID(), userName: userName,displayName: displayName, age: age, race: race, height: height, weight: weight, preExistingConditions: preExistingConditions)
-	//					profile_details.items.append(item)
-		
-						// Make it such that previous data of the same user is replaced when hit saved.
-						
-						// User shouldn't be able to change the username at all
-						
-//						let profile = Profile(context: moc)
-//						profile.uuid = uuid
-//						profile.displayName = displayName
-//						profile.age = Float(age) ?? 0.0
-//						profile.race = race
-//						profile.height = Float(height) ?? 0.0
-//						profile.weight = Float(weight) ?? 0.0
-//	//					profile.preExistingConditions = true
-//						profile.preExistingConditions = preExistingConditions == "Yes" ? true : false
 						preExCondition = convertToBool(statement: preExistingConditions)
 						profileItem.saveProfileToCoredata(displayName: displayName, age: Int16(age)!, race: race, height: Float(height)!, weight: Float(weight)!, preExistingConditions: preExCondition)
-						
-						
-	//					try? moc.save()
-//						do {
-//							try moc.save()
-//								print("Successfully saved..")
-//						} catch {
-//								print("Unexpected error: \(error).")
-	//						let nserror = error as NSError
-	//						fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-//							}
 						dismiss()
 					}
 					.foregroundColor(disableForm ? .white : .green)
@@ -163,7 +134,6 @@ struct ProfileEditView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-//		ProfileEditView(profile_details: ProfileDetails())
 		ProfileEditView(profileItem: ProfileItem())
     }
 }

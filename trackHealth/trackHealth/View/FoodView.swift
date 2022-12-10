@@ -73,27 +73,11 @@ struct FoodView: View {
 			
 			NavigationView {
 				VStack (spacing: 30) {
-//					List {
 					Text("Your average calorie intake so far: ")
 					Text("Breakfast : \(mealItem.getAverageCalorie(mealType: "Breakfast")) Calories")
 					Text("Lunch : \(mealItem.getAverageCalorie(mealType: "Lunch")) Calories")
 					Text("Dinner : \(mealItem.getAverageCalorie(mealType: "Dinner")) Calories")
 					Text("Snacks : \(mealItem.getAverageCalorie(mealType: "Snacks")) Calories")
-						
-
-//						ForEach(allMeal_details.items) { item in
-//							HStack {
-//								VStack(alignment: .leading) {
-//									Text(item.mealType)
-//										.font(.headline)
-//									HStack {
-//										TestRow(arg1: item.foodOne, arg2: item.foodTwo ?? "", arg3: item.foodThree ?? "", arg4: item.foodFour ?? "", arg5: item.totalCalories)
-//									}
-//								}
-//							}
-//						}
-//						.onDelete(perform: removeItems)
-//					}
 					.toolbar {
 						Button {
 							showingAddMeal = true
@@ -106,7 +90,6 @@ struct FoodView: View {
 					}
 					.sheet(isPresented: $showingAddMeal) {
 						AddMealView(mealItem: MealItem())
-//						AddMealView(allMeal_details: allMeal_details)
 					}
 				}
 			}

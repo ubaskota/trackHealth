@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-//	@StateObject private var dataController = DataController()
-//	@FetchRequest(sortDescriptors: []) var profileInfo: FetchedResults<Profile>
 	
 	@State var showingProfile = false;
 	let mainTopics: [String] = ["Food", "Workout", "Sleep", "Review"]
@@ -22,8 +20,6 @@ struct ContentView: View {
 					
 					NavigationLink {
 						switch topic {
-//						case "Food":
-//							FoodView(mealItem: MealItem())
 						case "Workout":
 							WorkoutView()
 						case "Sleep":

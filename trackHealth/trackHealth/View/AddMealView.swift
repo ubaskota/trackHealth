@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct AddMealView: View {
-//	@ObservedObject var allMeal_details: MealDetails
 	@Environment(\.dismiss) var dismiss
-//	@Environment(\.managedObjectContext) var moc
 	
 	var mealItem: MealItem
 	
@@ -27,10 +25,6 @@ struct AddMealView: View {
 		
 		NavigationView {
 			Form {
-//				Text("Add the meal type")
-//					.font(.system(size: 25, weight: .bold, design: .default)).foregroundColor(Color.green)
-//					.padding([.top, .bottom])
-//
 				Picker("Meal", selection: $mealType) {
 					ForEach(meals, id: \.self) {
 						Text($0)
@@ -66,24 +60,6 @@ struct AddMealView: View {
 			}
 			.toolbar {
 				Button("ADD") {
-//					let item = MealItem(mealType: mealType, foodOne: foodOne, foodTwo: foodTwo, foodThree: foodThree, foodFour: foodFour, totalCalories: Int(total_calories))
-//					allMeal_details.items.append(item)
-					
-					
-//					let meal = Meal(context: moc)
-//					meal.uuid = UUID()
-//					meal.mealType = mealType
-//					meal.foodOne = foodOne
-//					meal.foodTwo = foodTwo
-//					meal.foodThree = foodThree
-//					meal.foodFour = foodFour
-//					meal.totalCalories = Float(total_calories)
-//					do {
-//						try moc.save()
-//							print("Successfully saved meals...")
-//					} catch {
-//						print("Unexpected error in meal adddition: \(error).")
-//					}
 					self.mealItem.saveMealToCoreData(mealType: mealType, foodOne: foodOne, foodTwo: foodTwo, foodThree: foodThree, foodFour: foodFour, totalCalories: Int32(total_calories))
 					dismiss()
 				}
@@ -106,6 +82,5 @@ struct AddMealView: View {
 struct AddMealView_Previews: PreviewProvider {
     static var previews: some View {
 		AddMealView(mealItem: MealItem())
-//		AddMealView(allMeal_details: MealDetails())
     }
 }

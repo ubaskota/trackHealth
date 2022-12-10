@@ -9,15 +9,6 @@ import Foundation
 
 
 class ProfileItem: NSObject, ObservableObject {
-
-//	var id = UUID()
-//	let userName: String?
-//	let displayName: String?
-//	let age: String?
-//	let race: String?
-//	let height: String?
-//	let weight: String?
-//	let preExistingConditions: String
 	
 	let coreDM: DataController = DataController.shared
 	

@@ -55,7 +55,6 @@ struct LoginView: View {
 			}
 		}
 		.padding([.leading, .trailing], 30.0)
-//		.background(.darkBackground)
 	}
 	
 	var disableForm: Bool {
