@@ -18,9 +18,9 @@ class MealItem: NSObject, ObservableObject {
 	}
 	
 	
-	func getAverageCalorie(mealType: String) -> Float {
+	func getAverageCalorie(mealType: String) -> Int32 {
 		var averageBreakfastCalories = 0
-		var count = 1
+		var count = 0
 		let mealInfo = getMealFromCoreData()
 		for meal in mealInfo{
 			if meal.mealType == mealType {
@@ -28,7 +28,10 @@ class MealItem: NSObject, ObservableObject {
 				count += 1
 			}
 		}
-		return Float(averageBreakfastCalories/count)
+		if count == 0{
+			return Int32(averageBreakfastCalories)
+		}
+		return Int32(averageBreakfastCalories/count)
 	}
 	
 	

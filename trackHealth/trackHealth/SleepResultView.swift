@@ -9,13 +9,16 @@ import SwiftUI
 
 struct SleepResultView: View {
 	@ObservedObject var audioRecorder = AudioRecorder()
-//	@Environment(\.managedObjectContext) var moc
-//	@FetchRequest(entity: Sleep.entity(), sortDescriptors: []) var sleepDetail: FetchedResults<Sleep>
 
 	var body: some View {
 		Text("Hello")
 		List(audioRecorder.getSleepFromCoreData()) { sInfo in
-			Text(String(sInfo.sleepScore))
+			NavigationLink {
+//				Text(String(sInfo.sleepFileName!))
+				SleepGraphView(sleepFileName: sInfo.sleepFileName!, audioRecorder: AudioRecorder())
+			} label: {
+				Text(String(sInfo.sleepFileName!))
+			}
 		}
 	}
 }

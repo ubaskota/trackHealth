@@ -46,7 +46,7 @@ struct SleepRecordView: View {
 						.foregroundColor(.green)
 						.frame(width: 350, height: 200)
 						.background(.lightBackground)
-						.padding([.top, .trailing])
+//						.padding([.top, .trailing])
 					if audioRecorder.recording == false {
 						Button(action: {self.audioRecorder.startRecording(); recordCount+=1; displaySurveyView = true}) {
 							Image(systemName: "circle.fill")
@@ -94,7 +94,7 @@ struct SleepRecordTopView: View {
 			.foregroundColor(.green)
 			.frame(width: 350, height: 200)
 			.background(.lightBackground)
-			.padding([.top, .trailing])
+//			.padding([.top, .trailing])
 			
 		}
 	}

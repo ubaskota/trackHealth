@@ -28,7 +28,7 @@ class AudioRecorder: NSObject, ObservableObject {
 	@Published var sleepStartTime: Date!
 	@Published var sleepStopTime: Date!
 	@Published var sleepFileName: String!
-	@Published var soundDb = [Float]()
+	@Published var soundDb = [Double]()
 	@Published var uuid: UUID!
 	@Published var sleepScore: Float!
 	
@@ -71,8 +71,10 @@ class AudioRecorder: NSObject, ObservableObject {
 			Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [self] timer in
 				self.audioRecorder.updateMeters()
 				let db = audioRecorder.averagePower(forChannel: 0)
-				self.soundDb.append(db)
-				print(self.soundDb)
+				if db > -60 {
+					self.soundDb.append(Double(db))
+					print(self.soundDb)
+				}
 				if recording == false{
 					timer.invalidate()
 				}
@@ -122,7 +124,7 @@ class AudioRecorder: NSObject, ObservableObject {
 	func saveSleepToCoreData(survey: Int16){
 		
 		sleepFileName = getfileName()
-		sleepScore = calculateSleepScore(survey: survey)
+		sleepScore = Float(calculateSleepScore(survey: survey))
 		coreDM.saveSleepDataToCoreData(survey: survey, fileName: sleepFileName, sleepScore: sleepScore, sleepStartTime: sleepStartTime, sleepStopTime: sleepStopTime, soundDb: soundDb)
 	}
 	
@@ -132,7 +134,7 @@ class AudioRecorder: NSObject, ObservableObject {
 	}
 	
 	
-	func calculateSleepScore(survey: Int16) -> Float {
+	func calculateSleepScore(survey: Int16) -> Double {
 		let filteredDb = sleepDBFilter()
 		print(filteredDb)
 		let filteredDBCount = filteredDb.count
@@ -140,13 +142,13 @@ class AudioRecorder: NSObject, ObservableObject {
 		if filteredDBCount == 0 {
 			totalDB = 0
 		}
-		let finalSleepScore = (totalDB / Float(filteredDBCount)) + Float(survey * 20)
+		let finalSleepScore = (totalDB / Double(filteredDBCount)) + Double(survey * 20)
 		return finalSleepScore
 	}
 	
 	
-	func sleepDBFilter() -> [Float] {
-		var filteredSleepDB = [Float]()
+	func sleepDBFilter() -> [Double] {
+		var filteredSleepDB = [Double]()
 		
 		for db in self.soundDb {
 			if db > -35 {
@@ -159,6 +161,19 @@ class AudioRecorder: NSObject, ObservableObject {
 		print(self.soundDb)
 		return filteredSleepDB
 	}
+	
+	
+	func getSleepArrayFromCoreData(recordDateTime: String) -> [Double] {
+		return coreDM.getSleepDbDataArrayFromCoreData(recordDateTime: recordDateTime)
+	}
+	
+//	func getSleepArrayFromCoreData(recordDateTime: String) -> [String] {
+//		print("HELLO")
+//		let test = coreDM.getSleepDbDataArrayFromCoreData(recordDateTime: recordDateTime)
+//		print("This is a test ", test)
+//		return test
+//	}
+	
 	
 	
 //	func unarchiveSleepDB() -> [String] {

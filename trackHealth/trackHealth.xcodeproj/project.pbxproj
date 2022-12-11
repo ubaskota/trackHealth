@@ -37,6 +37,8 @@
 		0CCB2EEA29396C3E0055BCA7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCB2EE929396C3E0055BCA7 /* LoginView.swift */; };
 		0CD68A5C293B05DC00FA6A40 /* SleepRecordSurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD68A5B293B05DC00FA6A40 /* SleepRecordSurveyView.swift */; };
 		0CD68A5E293B19D500FA6A40 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD68A5D293B19D500FA6A40 /* TestView.swift */; };
+		0CF5E54229450AF000DB3EFA /* SleepGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF5E54129450AF000DB3EFA /* SleepGraphView.swift */; };
+		0CF5E545294517B200DB3EFA /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 0CF5E544294517B200DB3EFA /* SwiftUICharts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +73,7 @@
 		0CCB2EE929396C3E0055BCA7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		0CD68A5B293B05DC00FA6A40 /* SleepRecordSurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepRecordSurveyView.swift; sourceTree = "<group>"; };
 		0CD68A5D293B19D500FA6A40 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		0CF5E54129450AF000DB3EFA /* SleepGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepGraphView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CF5E545294517B200DB3EFA /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				0C494561293FE41F00175670 /* SleepResultView.swift */,
+				0CF5E54129450AF000DB3EFA /* SleepGraphView.swift */,
 				0C03B2E12849A6A000CBEEBA /* WorkoutView.swift */,
 				0C03B2DF2849A69000CBEEBA /* SleepView.swift */,
 				0C465AAB2936F66E006392B0 /* SleepRecordView.swift */,
@@ -201,6 +206,9 @@
 			dependencies = (
 			);
 			name = trackHealth;
+			packageProductDependencies = (
+				0CF5E544294517B200DB3EFA /* SwiftUICharts */,
+			);
 			productName = trackHealth;
 			productReference = 0C03B2BE283F1CE500CBEEBA /* trackHealth.app */;
 			productType = "com.apple.product-type.application";
@@ -229,6 +237,9 @@
 				Base,
 			);
 			mainGroup = 0C03B2B5283F1CE400CBEEBA;
+			packageReferences = (
+				0CF5E543294517B200DB3EFA /* XCRemoteSwiftPackageReference "ChartView" */,
+			);
 			productRefGroup = 0C03B2BF283F1CE500CBEEBA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -259,6 +270,7 @@
 				0C09D240293824560062C553 /* RecordingDataModel.swift in Sources */,
 				0C465AAC2936F66E006392B0 /* SleepRecordView.swift in Sources */,
 				0C03B2D42846EDF900CBEEBA /* FoodView.swift in Sources */,
+				0CF5E54229450AF000DB3EFA /* SleepGraphView.swift in Sources */,
 				0C8752F72922B7210080228F /* ProfileItem.swift in Sources */,
 				0C03B2C4283F1CE500CBEEBA /* ContentView.swift in Sources */,
 				0C7ACDBF2921EE6C009C32C8 /* ProfileEditView.swift in Sources */,
@@ -485,6 +497,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0CF5E543294517B200DB3EFA /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0CF5E544294517B200DB3EFA /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0CF5E543294517B200DB3EFA /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		0C49455B293FBF1800175670 /* HealthData.xcdatamodeld */ = {

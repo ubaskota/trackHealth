@@ -23,7 +23,7 @@ class DataController: ObservableObject {
 	}
 	
 	
-	func saveSleepDataToCoreData(survey: Int16, fileName: String, sleepScore: Float, sleepStartTime: Date, sleepStopTime: Date, soundDb: [Float]) {
+	func saveSleepDataToCoreData(survey: Int16, fileName: String, sleepScore: Float, sleepStartTime: Date, sleepStopTime: Date, soundDb: [Double]) {
 		
 		let sleep = Sleep(context: container.viewContext)
 		sleep.uuid = UUID()
@@ -32,14 +32,15 @@ class DataController: ObservableObject {
 		sleep.sleepStartTime = sleepStartTime
 		sleep.sleepStopTime = sleepStopTime
 		sleep.survey = survey
+		sleep.soundDb = soundDb
 		
-		do {
-			try sleep.soundDb = try NSKeyedArchiver.archivedData(withRootObject: soundDb, requiringSecureCoding: true)
-			print("Successfully saved..")
-		}
-		catch {
-			print("Unexpected error: \(error).")
-		}
+//		do {
+//			try sleep.soundDb = try NSKeyedArchiver.archivedData(withRootObject: soundDb, requiringSecureCoding: true)
+//			print("Successfully saved..")
+//		}
+//		catch {
+//			print("Unexpected error: \(error).")
+//		}
 		
 		do {
 			try container.viewContext.save()
@@ -93,6 +94,8 @@ class DataController: ObservableObject {
 	func getSleepDataFromCoreData() -> [Sleep] {
 		let fetchRequest: NSFetchRequest<Sleep> = Sleep.fetchRequest()
 		fetchRequest.returnsObjectsAsFaults = false
+
+		
 		do {
 			return try container.viewContext.fetch(fetchRequest)
 		} catch let error {
@@ -123,6 +126,76 @@ class DataController: ObservableObject {
 			print("ERROR while getting sleepdata: \(error.localizedDescription)")
 			return []
 		}
+	}
+	
+	
+//	func getSleepDbDataArrayFromCoreData(recordDateTime: String) -> [Double] {
+//		var soundData: [Sleep]
+//		let fetchRequest: NSFetchRequest<Sleep> = Sleep.fetchRequest()
+//		fetchRequest.returnsObjectsAsFaults = false
+//		let filter = NSPredicate(format: "sleepFileName == %@", recordDateTime)
+//		fetchRequest.predicate = filter
+//
+//		do {
+//			soundData = try container.viewContext.fetch(fetchRequest)
+//		} catch let error {
+//			print("ERROR while fetching data from db array \(error.localizedDescription)")
+//			return []
+//		}
+//
+//		for item in soundData {
+//			if let recordedSoundDb = item.soundDb {
+//			  do {
+//				  if let soundDbArr = try (NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: recordedSoundDb) as? [String]) {
+//					  print(soundDbArr)
+//					  return soundDbArr.map {Double($0)!}  //Converting an array of strings to an array of Floats
+//				}
+//			  } catch {
+//				print("could not unarchive array: \(error)")
+//			  }
+//			}
+//		}
+//
+//		return []
+//	}
+	
+	
+	func getSleepDbDataArrayFromCoreData(recordDateTime: String) -> [Double] {
+		var soundData: [Sleep]
+		let fetchRequest: NSFetchRequest<Sleep> = Sleep.fetchRequest()
+		fetchRequest.returnsObjectsAsFaults = false
+		let filter = NSPredicate(format: "sleepFileName == %@", recordDateTime)
+		fetchRequest.predicate = filter
+		
+		do {
+			soundData = try container.viewContext.fetch(fetchRequest)
+		} catch let error {
+			print("ERROR while fetching data from db array \(error.localizedDescription)")
+			return []
+		}
+//		return soundData.soundDb
+		for item in soundData {
+			let returnItem = item.soundDb
+			return returnItem!
+		}
+		
+//		for item in soundData {
+//			if let recordedSoundDb = item.soundDb {
+//				print("HEre")
+//				print(item.soundDb!)
+//			  do {
+//				  if let soundDbArr = try (NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: recordedSoundDb) as? [String]) {
+//					  print(soundDbArr)
+//					  return soundDbArr
+////					  return soundDbArr.map {String($0)!}  //Converting an array of strings to an array of Floats
+//				}
+//			  } catch {
+//				print("could not unarchive array: \(error)")
+//			  }
+//			}
+//		}
+		
+		return []
 	}
 	
 }
