@@ -94,7 +94,8 @@ class DataController: ObservableObject {
 	func getSleepDataFromCoreData() -> [Sleep] {
 		let fetchRequest: NSFetchRequest<Sleep> = Sleep.fetchRequest()
 		fetchRequest.returnsObjectsAsFaults = false
-
+		let sort = NSSortDescriptor(key: "sleepStartTime", ascending: false)
+		fetchRequest.sortDescriptors = [sort]
 		
 		do {
 			return try container.viewContext.fetch(fetchRequest)

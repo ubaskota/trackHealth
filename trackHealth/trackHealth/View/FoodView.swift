@@ -50,12 +50,12 @@ struct TestRow: View {
 
 struct FoodView: View {
 	
-	@State private var selection: String? = nil
+//	@State private var selection: String? = nil
 	@State private var showingAddMeal = false
 //	@StateObject var allMeal_details = MealDetails()
 	@ObservedObject var mealItem: MealItem
 //	@FetchRequest(entity: Meal.entity(), sortDescriptors: []) var mealInfo: FetchedResults<Meal>
-	var bColor = "green"
+//	var bColor = "green"
 	
     var body: some View {
 		VStack {
@@ -103,7 +103,9 @@ struct FoodView: View {
 					.clipShape(Ellipse())
 			}
 			.background(
-				RoundedRectangle(cornerRadius: 40))
+//				RoundedRectangle(cornerRadius: 40)
+				Ellipse()
+					.frame(width: 50, height: 50))
 		}
 
     }
@@ -112,7 +114,6 @@ struct FoodView: View {
 //		allMeal_details.items.remove(atOffsets: offsets)
 //	}
 }
-
 
 
 struct FoodView_Previews: PreviewProvider {

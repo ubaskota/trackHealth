@@ -25,3 +25,9 @@ func getDisplayDate(for creationDate: Date) -> String {
 	return newCreationDate
 }
 
+func getDateInHours(for givenDateTime: Date) -> String {
+	let newCreationDate = givenDateTime.toString(dateFormat: "h:mm a")
+	print("This is creation date : ", newCreationDate)
+	return newCreationDate
+}
+

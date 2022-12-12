@@ -15,9 +15,9 @@ struct SleepResultView: View {
 		List(audioRecorder.getSleepFromCoreData()) { sInfo in
 			NavigationLink {
 //				Text(String(sInfo.sleepFileName!))
-				SleepGraphView(sleepFileName: sInfo.sleepFileName!, audioRecorder: AudioRecorder())
+				SleepGraphView(sleepFileName: sInfo.sleepFileName!, sleepStartTime: sInfo.sleepStartTime!, sleepStopTime: sInfo.sleepStopTime!, audioRecorder: AudioRecorder())
 			} label: {
-				Text(String(sInfo.sleepFileName!))
+				SleepResultRowView(sleepScore: Int(sInfo.sleepScore), fileName: sInfo.sleepFileName!)
 			}
 		}
 	}

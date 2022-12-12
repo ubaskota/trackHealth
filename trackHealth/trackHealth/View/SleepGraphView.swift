@@ -28,13 +28,14 @@ import SwiftUI
 
 struct SleepGraphView: View {
 	var sleepFileName: String
+	var sleepStartTime: Date
+	var sleepStopTime: Date
 	@ObservedObject var audioRecorder = AudioRecorder()
 	
 	var body: some View {
-		VStack {
-			Text("Hello")
 
-			LineView(data: audioRecorder.getSleepArrayFromCoreData(recordDateTime: sleepFileName), title: "Line Chart", legend: "Loudness of the sound recorded in your sleep form start time to end time, left to right.", valueSpecifier: "Kera")
+		VStack {
+			LineView(data: audioRecorder.getSleepArrayFromCoreData(recordDateTime: sleepFileName), title: "Sleep Chart", legend: "Loudness of the sound recorded in your sleep from \(getDateInHours(for: sleepStartTime)) to \(getDateInHours(for: sleepStopTime)), left to right.")
 				.frame(height: 500)
 		}
 		

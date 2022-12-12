@@ -39,6 +39,8 @@
 		0CD68A5E293B19D500FA6A40 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD68A5D293B19D500FA6A40 /* TestView.swift */; };
 		0CF5E54229450AF000DB3EFA /* SleepGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF5E54129450AF000DB3EFA /* SleepGraphView.swift */; };
 		0CF5E545294517B200DB3EFA /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 0CF5E544294517B200DB3EFA /* SwiftUICharts */; };
+		0CF5E5472945997100DB3EFA /* SleepResultRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF5E5462945997100DB3EFA /* SleepResultRowView.swift */; };
+		0CF5E5492946A48600DB3EFA /* AddWorkOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF5E5482946A48600DB3EFA /* AddWorkOutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +76,8 @@
 		0CD68A5B293B05DC00FA6A40 /* SleepRecordSurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepRecordSurveyView.swift; sourceTree = "<group>"; };
 		0CD68A5D293B19D500FA6A40 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		0CF5E54129450AF000DB3EFA /* SleepGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepGraphView.swift; sourceTree = "<group>"; };
+		0CF5E5462945997100DB3EFA /* SleepResultRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepResultRowView.swift; sourceTree = "<group>"; };
+		0CF5E5482946A48600DB3EFA /* AddWorkOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkOutView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,8 +150,10 @@
 		0C4014EF29312F5A00CCF391 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0CF5E5482946A48600DB3EFA /* AddWorkOutView.swift */,
 				0C494561293FE41F00175670 /* SleepResultView.swift */,
 				0CF5E54129450AF000DB3EFA /* SleepGraphView.swift */,
+				0CF5E5462945997100DB3EFA /* SleepResultRowView.swift */,
 				0C03B2E12849A6A000CBEEBA /* WorkoutView.swift */,
 				0C03B2DF2849A69000CBEEBA /* SleepView.swift */,
 				0C465AAB2936F66E006392B0 /* SleepRecordView.swift */,
@@ -268,6 +274,7 @@
 			files = (
 				0C09D242293825000062C553 /* RecordHelper.swift in Sources */,
 				0C09D240293824560062C553 /* RecordingDataModel.swift in Sources */,
+				0CF5E5492946A48600DB3EFA /* AddWorkOutView.swift in Sources */,
 				0C465AAC2936F66E006392B0 /* SleepRecordView.swift in Sources */,
 				0C03B2D42846EDF900CBEEBA /* FoodView.swift in Sources */,
 				0CF5E54229450AF000DB3EFA /* SleepGraphView.swift in Sources */,
@@ -286,6 +293,7 @@
 				0C03B2D0283F2FD800CBEEBA /* Color-Theme.swift in Sources */,
 				0C875302292837B60080228F /* ReviewView.swift in Sources */,
 				0C4014F62931B6B200CCF391 /* RecordingListView.swift in Sources */,
+				0CF5E5472945997100DB3EFA /* SleepResultRowView.swift in Sources */,
 				0C49455A293FB1E400175670 /* SleepHistory.swift in Sources */,
 				0C465A6A29341FB8006392B0 /* AudioDisplay.swift in Sources */,
 				0C03B2E02849A69000CBEEBA /* SleepView.swift in Sources */,
