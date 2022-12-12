@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct TestRow: View {
 	var arg1: String = ""
@@ -49,13 +50,14 @@ struct TestRow: View {
 
 struct FoodView: View {
 	
-	@State private var selection: String? = nil
+//	@State private var selection: String? = nil
 	@State private var showingAddMeal = false
-	@StateObject var allMeal_details = MealDetails()
-	var bColor = "green"
+//	@StateObject var allMeal_details = MealDetails()
+	@ObservedObject var mealItem: MealItem
+//	@FetchRequest(entity: Meal.entity(), sortDescriptors: []) var mealInfo: FetchedResults<Meal>
+//	var bColor = "green"
 	
     var body: some View {
-		
 		VStack {
 			VStack {
 				Text("Add your meal")
@@ -71,20 +73,11 @@ struct FoodView: View {
 			
 			NavigationView {
 				VStack (spacing: 30) {
-					List {
-						ForEach(allMeal_details.items) { item in
-							HStack {
-								VStack(alignment: .leading) {
-									Text(item.mealType)
-										.font(.headline)
-									HStack {
-										TestRow(arg1: item.foodOne, arg2: item.foodTwo ?? "", arg3: item.foodThree ?? "", arg4: item.foodFour ?? "", arg5: item.totalCalories)
-									}
-								}
-							}
-						}
-						.onDelete(perform: removeItems)
-					}
+					Text("Your average calorie intake so far: ")
+					Text("Breakfast : \(mealItem.getAverageCalorie(mealType: "Breakfast")) Calories")
+					Text("Lunch : \(mealItem.getAverageCalorie(mealType: "Lunch")) Calories")
+					Text("Dinner : \(mealItem.getAverageCalorie(mealType: "Dinner")) Calories")
+					Text("Snacks : \(mealItem.getAverageCalorie(mealType: "Snacks")) Calories")
 					.toolbar {
 						Button {
 							showingAddMeal = true
@@ -96,7 +89,7 @@ struct FoodView: View {
 						}
 					}
 					.sheet(isPresented: $showingAddMeal) {
-						AddMealView(allMeal_details: allMeal_details)
+						AddMealView(mealItem: MealItem())
 					}
 				}
 			}
@@ -110,21 +103,22 @@ struct FoodView: View {
 					.clipShape(Ellipse())
 			}
 			.background(
-				RoundedRectangle(cornerRadius: 40))
+//				RoundedRectangle(cornerRadius: 40)
+				Ellipse()
+					.frame(width: 50, height: 50))
 		}
 
     }
 	
-	func removeItems(at offsets: IndexSet) {
-		allMeal_details.items.remove(atOffsets: offsets)
-	}
+//	func removeItems(at offsets: IndexSet) {
+//		allMeal_details.items.remove(atOffsets: offsets)
+//	}
 }
-
 
 
 struct FoodView_Previews: PreviewProvider {
     static var previews: some View {
-        FoodView()
+        FoodView(mealItem: MealItem())
     }
 }
 

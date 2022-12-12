@@ -8,54 +8,21 @@
 import SwiftUI
 
 struct ReviewView: View {
-	@Environment(\.managedObjectContext) var moc
-//	@FetchRequest(sortDescriptors: []) var profileInfo: FetchedResults<Profile>
-	@FetchRequest(sortDescriptors: []) var sleepInfo: FetchedResults<Sleep>
+	@ObservedObject var mealItem: MealItem
 	
-    var body: some View {
+	var body: some View {
 		Text("Lamo Kera")
-//		let sleepDB = audioRecorder.unarchiveSleepDB()
-
-		List(sleepInfo){ pInfo in
-			Text(String(pInfo.survey) ?? "Geda")
-			Text(String(pInfo.sleepScore) ?? "Geda")
-			Text(pInfo.sleepStartTime!, style: .time)
-			Text(pInfo.sleepStopTime!, style: .time)
-			Text(String(pInfo.sleepFileName ?? "Geda"))
-			
-//			ForEach(profileInfo) { pInfo in
-//				VStack {
-//					Text(pInfo.race ?? "Unknown")
-//						.font(.headline)
-//					Text("\(pInfo.weight)")
-//						.foregroundColor(.secondary)
-//				}
-//			}
+		
+		List(mealItem.getMealFromCoreData()){ pInfo in
+			Text(String(pInfo.foodOne!))
+			Text(String(pInfo.totalCalories))
 		}
-//		Text("This is sleepdb: \(sleepDB)")
-    }
-	
-
-	func unarchiveSleepDB() -> [String] {
-		let sleep = Sleep(context: moc)
-
-		if let sleep = sleep.soundDb {
-		  do {
-			if let sleepDBArray = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: sleep) as? [String] {
-			  dump(sleepDBArray)
-				return sleepDBArray
-			}
-		  } catch {
-			print("could not unarchive array: \(error)")
-		  }
-		}
-		return []
 	}
-
 }
+
 
 struct ReviewView_Previews: PreviewProvider {
     static var previews: some View {
-        ReviewView()
+        ReviewView(mealItem: MealItem())
     }
 }

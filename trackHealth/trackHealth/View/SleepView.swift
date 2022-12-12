@@ -20,7 +20,8 @@ struct SleepView: View {
 						case "sleep_record":
 							SleepRecordView(audioRecorder: AudioRecorder())
 						default:
-							SleepHistoryView()
+							SleepResultView()
+//							ReviewView()
 						}
 					} label: {
 						VStack {

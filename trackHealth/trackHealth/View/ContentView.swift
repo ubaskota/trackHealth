@@ -8,31 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
-//	@StateObject private var dataController = DataController()
-//	@FetchRequest(sortDescriptors: []) var profileInfo: FetchedResults<Profile>
 	
 	@State var showingProfile = false;
 	let mainTopics: [String] = ["Food", "Workout", "Sleep", "Review"]
 	var topicImage : [String: String] = ["food": "foodImg", "Workout": "workoutImg", "Sleep": "sleepImg", "Review": "reviewImg"]
 	
-	@ViewBuilder
-    var body: some View {
+	var body: some View {
 		NavigationView {
 			ScrollView {
 				ForEach(mainTopics, id: \.self) { topic in
 					
 					NavigationLink {
 						switch topic {
-						case "Food":
-							FoodView()
 						case "Workout":
 							WorkoutView()
 						case "Sleep":
 							SleepView()
 						case "Review":
-							ReviewView()
+							ReviewView(mealItem: MealItem())
 						default:
-							FoodView()
+							FoodView(mealItem: MealItem())
 						}
 					} label: {
 					VStack {
@@ -65,17 +60,11 @@ struct ContentView: View {
 					}) {
 						Text("Profile")
 					}.sheet(isPresented: $showingProfile) {
-						ProfileEditView()
+						ProfileEditView(profileItem: ProfileItem())
 					}
 						.font(.system(size: 20, weight: Font.Weight.bold))
 						.foregroundColor(Color.green)
 				}
-				
-//				ToolbarItem(placement: .navigationBarTrailing) {
-//					Button("signin") {}
-//						.font(.system(size: 20, weight: Font.Weight.bold))
-//						.foregroundColor(Color.green)
-//				}
 			}
 			.navigationTitle("Track-Health")
 		}

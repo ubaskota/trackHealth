@@ -55,7 +55,6 @@ struct LoginView: View {
 			}
 		}
 		.padding([.leading, .trailing], 30.0)
-//		.background(.darkBackground)
 	}
 	
 	var disableForm: Bool {
@@ -65,6 +64,7 @@ struct LoginView: View {
 		return true
 	}
 }
+
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {

@@ -8,26 +8,23 @@
 import SwiftUI
 
 struct AddMealView: View {
-	@ObservedObject var allMeal_details: MealDetails
 	@Environment(\.dismiss) var dismiss
 	
-	@State private var mealType = ""
+	var mealItem: MealItem
+	
+	@State private var mealType = "Breakfast"
 	let meals = ["Breakfast", "Lunch", "Dinner", "Snacks"]
 	
 	@State private var foodOne = ""
 	@State private var foodTwo = ""
 	@State private var foodThree = ""
 	@State private var foodFour = ""
-	@State private var total_calories = 0.0
+	@State private var total_calories = 0
 	
     var body: some View {
 		
 		NavigationView {
 			Form {
-//				Text("Add the meal type")
-//					.font(.system(size: 25, weight: .bold, design: .default)).foregroundColor(Color.green)
-//					.padding([.top, .bottom])
-//
 				Picker("Meal", selection: $mealType) {
 					ForEach(meals, id: \.self) {
 						Text($0)
@@ -63,8 +60,7 @@ struct AddMealView: View {
 			}
 			.toolbar {
 				Button("ADD") {
-					let item = MealItem(mealType: mealType, foodOne: foodOne, foodTwo: foodTwo, foodThree: foodThree, foodFour: foodFour, totalCalories: Int(total_calories))
-					allMeal_details.items.append(item)
+					self.mealItem.saveMealToCoreData(mealType: mealType, foodOne: foodOne, foodTwo: foodTwo, foodThree: foodThree, foodFour: foodFour, totalCalories: Int32(total_calories))
 					dismiss()
 				}
 				.font(.system(size: 20, weight: .bold, design: .default))
@@ -85,6 +81,6 @@ struct AddMealView: View {
 
 struct AddMealView_Previews: PreviewProvider {
     static var previews: some View {
-		AddMealView(allMeal_details: MealDetails())
+		AddMealView(mealItem: MealItem())
     }
 }

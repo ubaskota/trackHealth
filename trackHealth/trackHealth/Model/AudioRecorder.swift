@@ -12,10 +12,7 @@ import AVFoundation
 
 
 class AudioRecorder: NSObject, ObservableObject {
-	
-//	@Environment(\.managedObjectContext) var moc
-//	var moc = PersistentController.shared.container.viewContext
-	var moc = DataController.init().container.viewContext
+	let coreDM: DataController = DataController.shared
 	
 	override init() {
 		super.init()
@@ -31,8 +28,7 @@ class AudioRecorder: NSObject, ObservableObject {
 	@Published var sleepStartTime: Date!
 	@Published var sleepStopTime: Date!
 	@Published var sleepFileName: String!
-	@Published var soundDb = [Float]()
-//	var survey: Int16!
+	@Published var soundDb = [Double]()
 	@Published var uuid: UUID!
 	@Published var sleepScore: Float!
 	
@@ -75,13 +71,26 @@ class AudioRecorder: NSObject, ObservableObject {
 			Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [self] timer in
 				self.audioRecorder.updateMeters()
 				let db = audioRecorder.averagePower(forChannel: 0)
-				self.soundDb.append(db)
-				print(self.soundDb)
+				var dbToAdd: Float
+				// Logic regarding the algorithm explained below this function
+				if db > -60 {
+					dbToAdd = db * (-1)
+					if dbToAdd > 50 {
+						dbToAdd = 50
+					}
+					dbToAdd = (50 - dbToAdd) * 2
+					self.soundDb.append(Double(dbToAdd))
+					print(self.soundDb)
+				}
+				if recording == false{
+					timer.invalidate()
+				}
 			}
 		} catch {
 			print("Could not start recording")
 		}
 	}
+	// Since we calculate Dbfs(Decible sth sth) and it is in negative, we had to figure out a way to solve this. Lowest sound means anything below -50 and highest sound means anything closer to 0. Thus, we convert the numbers to positive. -45 which is a lowest sound becomes +45, which is still a lowest sound but doing so helps us to properly calculate the sleep score later. Subtracting it by 50 makes it easier to represent in the graph. -45(lower sound) has become +45 and, -3(louder sound) has become +3 but in our graph we want the louder sound to be shown higher than the lower sound. Subtracting the dbfs numbers by 50 will help us achive that.
 	
 	
 	func deleteAllPreviousRecordings() {
@@ -112,65 +121,49 @@ class AudioRecorder: NSObject, ObservableObject {
 		let fileManager = FileManager.default
 		let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
 		let directoryContents = try! fileManager.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
-		//		for audio in directoryContents {
 		let creationDateTime = getCreationDate(for: directoryContents[0])
-		//			let recording = Recording(fileURL: audio, createdAt: creationDateTime)
 		let displayRecording = DisplayRecording(displayCreationDate: getDisplayDate(for: creationDateTime), createdAt: creationDateTime)
 		recordingsForDisaply.append(displayRecording)
 		return displayRecording.displayCreationDate
 	}
 	
 	
-	func saveToCoreData(survey: Int16){
+	func saveSleepToCoreData(survey: Int16){
 		
-		let sleep = Sleep(context: moc)
-		sleep.uuid = UUID()
-		sleep.sleepFileName = getfileName()
-//		sleep.sleepScore = calculateSleepScore(survey: survey, soundDB: soundDb)
-		sleep.sleepScore = calculateSleepScore(survey: survey)
-		sleep.sleepStartTime = sleepStartTime
-		sleep.sleepStopTime = sleepStopTime
-		do {
-			try sleep.soundDb = try NSKeyedArchiver.archivedData(withRootObject: self.soundDb ?? [0.0], requiringSecureCoding: true)
-			print("Successfully saved..")
-		}
-		catch {
-			print("Unexpected error: \(error).")
-		}
-		sleep.survey = survey
-		
-		do {
-			try moc.save()
-			print("Sucessfully saved sleeep data")
-		} catch {
-			print("Unexpected error saving sleep data: \(error).")
-		}
+		sleepFileName = getfileName()
+		sleepScore = Float(calculateSleepScore(survey: survey))
+		self.soundDb.append(0) // Added this only to make sure that the graph goes from 0 to 100
+		self.soundDb.append(100) // Added this only to make sure that the graph goes from 0 to 100
+		coreDM.saveSleepDataToCoreData(survey: survey, fileName: sleepFileName, sleepScore: sleepScore, sleepStartTime: sleepStartTime, sleepStopTime: sleepStopTime, soundDb: soundDb)
 	}
 	
 	
-//	func calculateSleepScore(survey: Int16, soundDB: [Float]) -> Float {
-	func calculateSleepScore(survey: Int16) -> Float {
-//		let filteredDb = sleepDBFilter(soundDB: soundDB)
+	func getSleepFromCoreData() -> [Sleep] {
+		return coreDM.getSleepDataFromCoreData()
+	}
+	
+	
+	func calculateSleepScore(survey: Int16) -> Double {
 		let filteredDb = sleepDBFilter()
-		print(filteredDb)
-		let filteredDBCount = filteredDb.count
-		var totalDB = filteredDb.reduce(0, +) * -1
-		if filteredDBCount == 0 {
-			totalDB = 0
+//		print(filteredDb)
+		var dBCount = filteredDb.count
+		var totalDB = filteredDb.reduce(0, +)
+		if dBCount == 0 {
+			dBCount = 1
 		}
-		let finalSleepScore = totalDB + Float(survey * 20)
+		print("This iss the score from db array: \(totalDB/Double(dBCount))")
+		let finalSleepScore = (totalDB / Double(dBCount)) + Double(survey * 10)
 		return finalSleepScore
 	}
 	
 	
-//	func sleepDBFilter(soundDB: [Float]) -> [Float] {
-	func sleepDBFilter() -> [Float] {
-		var filteredSleepDB = [Float]()
-		
+	// In the current db array(after some data manipulation), 80 means the person's sleep at that point was loud and 20 means the person slept well. To further calculate sleepscore, we subtract the current sleep loudness by 100. Person with 20 loudness will get higher points(100-20 = 80) than the person with 80 loudness(100-80 = 20) and we divide the score to make below 50
+	func sleepDBFilter() -> [Double] {
+		var filteredSleepDB = [Double]()
+
 		for db in self.soundDb {
-			if db > -35 {
-				filteredSleepDB.append(db)
-			}
+			let dbForScore = (100 - db)/2
+			filteredSleepDB.append(dbForScore)
 //			if db < 0 {
 //				filteredSleepDB.append(db)
 //			}
@@ -178,6 +171,18 @@ class AudioRecorder: NSObject, ObservableObject {
 		print(self.soundDb)
 		return filteredSleepDB
 	}
+	
+	
+	func getSleepArrayFromCoreData(recordDateTime: String) -> [Double] {
+		return coreDM.getSleepDbDataArrayFromCoreData(recordDateTime: recordDateTime)
+	}
+	
+//	func getSleepArrayFromCoreData(recordDateTime: String) -> [String] {
+//		print("HELLO")
+//		let test = coreDM.getSleepDbDataArrayFromCoreData(recordDateTime: recordDateTime)
+//		print("This is a test ", test)
+//		return test
+//	}
 	
 	
 //	func unarchiveSleepDB() -> [String] {
@@ -216,7 +221,6 @@ class AudioRecorder: NSObject, ObservableObject {
 //		objectWillChange.send(self)
 //	}
 //
-	
-	
+
 }
 

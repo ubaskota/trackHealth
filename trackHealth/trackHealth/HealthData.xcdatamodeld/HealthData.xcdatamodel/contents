@@ -3,17 +3,21 @@
     <entity name="Login" representedClassName="Login" syncable="YES" codeGenerationType="class">
         <attribute name="password" optional="YES" attributeType="String"/>
         <attribute name="userName" optional="YES" attributeType="String"/>
-        <uniquenessConstraints>
-            <uniquenessConstraint>
-                <constraint value="userName"/>
-            </uniquenessConstraint>
-        </uniquenessConstraints>
+    </entity>
+    <entity name="Meal" representedClassName="Meal" syncable="YES" codeGenerationType="class">
+        <attribute name="foodFour" optional="YES" attributeType="String"/>
+        <attribute name="foodOne" optional="YES" attributeType="String"/>
+        <attribute name="foodThree" optional="YES" attributeType="String"/>
+        <attribute name="foodTwo" optional="YES" attributeType="String"/>
+        <attribute name="mealType" optional="YES" attributeType="String"/>
+        <attribute name="totalCalories" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
     </entity>
     <entity name="Profile" representedClassName="Profile" syncable="YES" codeGenerationType="class">
-        <attribute name="age" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="displayName" optional="YES" attributeType="String"/>
         <attribute name="gender" optional="YES" attributeType="String"/>
-        <attribute name="height" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="height" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="preExistingConditions" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="race" optional="YES" attributeType="String"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -24,8 +28,8 @@
         <attribute name="sleepScore" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="sleepStartTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="sleepStopTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="soundDb" optional="YES" attributeType="Binary"/>
-        <attribute name="survey" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
+        <attribute name="soundDb" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[Double]"/>
+        <attribute name="survey" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
     </entity>
 </model>
