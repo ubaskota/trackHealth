@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WorkoutView: View {
 	@State private var showingAddWorkout = false
+	var workOutItem: WorkOutItem
 	
     var body: some View {
 		VStack {
@@ -28,9 +29,9 @@ struct WorkoutView: View {
 			NavigationView {
 				VStack (spacing: 30) {
 					Text("Your Average workout so far: ")
-					Text("Weights: ")
-					Text("Run/Walk: ")
-					Text("Sports: ")
+					Text("Weights: \(workOutItem.getAverageWeightsTime()) minutes")
+					Text("Run/Walk: \(workOutItem.getAverageDistance()) miles")
+					Text("Sports: \(workOutItem.getAverageSportsTime()) minutes")
 					.toolbar {
 						Button {
 							showingAddWorkout = true
@@ -42,7 +43,7 @@ struct WorkoutView: View {
 						}
 					}
 						.sheet(isPresented: $showingAddWorkout) {
-							AddWorkOutView()
+							AddWorkOutView(workOutItem: WorkOutItem())
 						}
 				}
 			}
@@ -65,6 +66,6 @@ struct WorkoutView: View {
 
 struct WorkoutView_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutView()
+        WorkoutView(workOutItem: WorkOutItem())
     }
 }

@@ -20,53 +20,59 @@ struct AddMealView: View {
 	@State private var foodThree = ""
 	@State private var foodFour = ""
 	@State private var total_calories = 0
+//	@State private var displayNewView: Bool = false
 	
     var body: some View {
 		
 		NavigationView {
-			Form {
-				Picker("Meal", selection: $mealType) {
-					ForEach(meals, id: \.self) {
-						Text($0)
+			VStack {
+//				NavigationLink(destination: ContentView(), isActive: self.$displayNewView) { EmptyView() }
+				Form {
+					Picker("Meal", selection: $mealType) {
+						ForEach(meals, id: \.self) {
+							Text($0)
+						}
 					}
+					.font(.system(size: 20, weight: .bold, design: .default)).foregroundColor(Color.green)
+					
+					
+					Text("Add All the Foods")
+						.font(.system(size: 25, weight: .bold, design: .default)).foregroundColor(Color.green)
+						.padding([.top, .bottom])
+					TextField("Food One", text: $foodOne)
+						.padding()
+						.cornerRadius(20)
+					TextField("Food Two", text: $foodTwo)
+						.padding()
+						.cornerRadius(20)
+					TextField("Food Three", text: $foodThree)
+						.padding()
+						.cornerRadius(20)
+					TextField("Food Four", text: $foodFour)
+						.padding()
+						.cornerRadius(20)
+					
+					Text("Total Calories")
+						.font(.system(size: 25, weight: .bold, design: .default)).foregroundColor(Color.green)
+						.padding([.top, .bottom])
+					
+					TextField("Total Calories", value: $total_calories, formatter: NumberFormatter())
+						.keyboardType(.decimalPad)
+						.padding()
+						.cornerRadius(20)
 				}
-				.font(.system(size: 20, weight: .bold, design: .default)).foregroundColor(Color.green)
-				
-				
-				Text("Add All the Foods")
-					.font(.system(size: 25, weight: .bold, design: .default)).foregroundColor(Color.green)
-					.padding([.top, .bottom])
-				TextField("Food One", text: $foodOne)
-					.padding()
-					.cornerRadius(20)
-				TextField("Food Two", text: $foodTwo)
-					.padding()
-					.cornerRadius(20)
-				TextField("Food Three", text: $foodThree)
-					.padding()
-					.cornerRadius(20)
-				TextField("Food Four", text: $foodFour)
-					.padding()
-					.cornerRadius(20)
-				
-				Text("Total Calories")
-					.font(.system(size: 25, weight: .bold, design: .default)).foregroundColor(Color.green)
-					.padding([.top, .bottom])
-				
-				TextField("Total Calories", value: $total_calories, formatter: NumberFormatter())
-					.keyboardType(.decimalPad)
-					.padding()
-					.cornerRadius(20)
-			}
-			.toolbar {
-				Button("ADD") {
-					self.mealItem.saveMealToCoreData(mealType: mealType, foodOne: foodOne, foodTwo: foodTwo, foodThree: foodThree, foodFour: foodFour, totalCalories: Int32(total_calories))
-					dismiss()
+				.toolbar {
+					Button("ADD") {
+						self.mealItem.saveMealToCoreData(mealType: mealType, foodOne: foodOne, foodTwo: foodTwo, foodThree: foodThree, foodFour: foodFour, totalCalories: Int32(total_calories))
+//						displayNewView = true
+						dismiss()
+					}
+					.font(.system(size: 20, weight: .bold, design: .default))
+					.foregroundColor(disableForm ? .white : .green)
+					.disabled(disableForm)
 				}
-				.font(.system(size: 20, weight: .bold, design: .default))
-				.foregroundColor(disableForm ? .white : .green)
-				.disabled(disableForm)
 			}
+
 		}
     }
 	

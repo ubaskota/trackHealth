@@ -10,7 +10,7 @@ import SwiftUI
 struct SleepView: View {
 	let viewOptions: [String] = ["sleep_record", "sleep_history"]
 	let imageOptions: [String: String] = ["sleep_record": "microphoneImg", "sleep_history": "graphImg"]
-	let textOptions: [String: String] = ["sleep_record":"Record", "sleep_history": "Results"]
+	let textOptions: [String: String] = ["sleep_record":"Sleep Recorder", "sleep_history": "Results"]
 	
 	var body: some View {
 		ScrollView {

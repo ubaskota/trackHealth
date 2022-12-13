@@ -147,7 +147,7 @@ class AudioRecorder: NSObject, ObservableObject {
 		let filteredDb = sleepDBFilter()
 //		print(filteredDb)
 		var dBCount = filteredDb.count
-		var totalDB = filteredDb.reduce(0, +)
+		let totalDB = filteredDb.reduce(0, +)
 		if dBCount == 0 {
 			dBCount = 1
 		}

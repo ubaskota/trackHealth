@@ -18,6 +18,16 @@ class MealItem: NSObject, ObservableObject {
 	}
 	
 	
+	func saveMealToCoreData(mealType: String, foodOne: String, foodTwo: String, foodThree: String, foodFour: String, totalCalories: Int32) {
+		coreDM.saveMealDataToCoreData(mealType: mealType, foodOne: foodOne, foodTwo: foodTwo, foodThree: foodThree, foodFour: foodFour, totalCalories: totalCalories)
+	}
+	
+	
+	func getMealFromCoreData() -> [Meal] {
+		return coreDM.getMealDataFromCoreData()
+	}
+	
+	
 	func getAverageCalorie(mealType: String) -> Int32 {
 		var averageBreakfastCalories = 0
 		var count = 0
@@ -32,15 +42,5 @@ class MealItem: NSObject, ObservableObject {
 			return Int32(averageBreakfastCalories)
 		}
 		return Int32(averageBreakfastCalories/count)
-	}
-	
-	
-	func saveMealToCoreData(mealType: String, foodOne: String, foodTwo: String, foodThree: String, foodFour: String, totalCalories: Int32) {
-		coreDM.saveMealDataToCoreData(mealType: mealType, foodOne: foodOne, foodTwo: foodTwo, foodThree: foodThree, foodFour: foodFour, totalCalories: totalCalories)
-	}
-	
-	
-	func getMealFromCoreData() -> [Meal] {
-		return coreDM.getMealDataFromCoreData()
 	}
 }

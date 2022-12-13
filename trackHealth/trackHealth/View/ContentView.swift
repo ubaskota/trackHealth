@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
 	
 	@State var showingProfile = false;
-	let mainTopics: [String] = ["Food", "Workout", "Sleep", "Review"]
+	let mainTopics: [String] = ["Sleep", "Food", "Workout", "Review"]
 	var topicImage : [String: String] = ["food": "foodImg", "Workout": "workoutImg", "Sleep": "sleepImg", "Review": "reviewImg"]
 	
 	var body: some View {
@@ -21,7 +21,7 @@ struct ContentView: View {
 					NavigationLink {
 						switch topic {
 						case "Workout":
-							WorkoutView()
+							WorkoutView(workOutItem: WorkOutItem())
 						case "Sleep":
 							SleepView()
 						case "Review":

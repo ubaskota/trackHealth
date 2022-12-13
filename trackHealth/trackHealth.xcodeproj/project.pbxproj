@@ -41,6 +41,8 @@
 		0CF5E545294517B200DB3EFA /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 0CF5E544294517B200DB3EFA /* SwiftUICharts */; };
 		0CF5E5472945997100DB3EFA /* SleepResultRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF5E5462945997100DB3EFA /* SleepResultRowView.swift */; };
 		0CF5E5492946A48600DB3EFA /* AddWorkOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF5E5482946A48600DB3EFA /* AddWorkOutView.swift */; };
+		0CF5E54B2946BEE100DB3EFA /* workOutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF5E54A2946BEE000DB3EFA /* workOutItem.swift */; };
+		0CF5E54D294815C500DB3EFA /* ReviewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF5E54C294815C400DB3EFA /* ReviewItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +80,8 @@
 		0CF5E54129450AF000DB3EFA /* SleepGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepGraphView.swift; sourceTree = "<group>"; };
 		0CF5E5462945997100DB3EFA /* SleepResultRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepResultRowView.swift; sourceTree = "<group>"; };
 		0CF5E5482946A48600DB3EFA /* AddWorkOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkOutView.swift; sourceTree = SOURCE_ROOT; };
+		0CF5E54A2946BEE000DB3EFA /* workOutItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workOutItem.swift; sourceTree = "<group>"; };
+		0CF5E54C294815C400DB3EFA /* ReviewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewItem.swift; path = trackHealth/View/ReviewItem.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,10 +139,12 @@
 		0C4014EE29312F2D00CCF391 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0CF5E54C294815C400DB3EFA /* ReviewItem.swift */,
 				0C09D23F293824560062C553 /* RecordingDataModel.swift */,
 				0C03B2DB2848589B00CBEEBA /* MealDetails.swift */,
 				0C8752F82922B8ED0080228F /* ProfileDetails.swift */,
 				0C8752F62922B7210080228F /* ProfileItem.swift */,
+				0CF5E54A2946BEE000DB3EFA /* workOutItem.swift */,
 				0C03B2D528470A6400CBEEBA /* MealItem.swift */,
 				0C4014F329318D8100CCF391 /* AudioRecorder.swift */,
 				0C465A6929341FB8006392B0 /* AudioDisplay.swift */,
@@ -272,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CF5E54D294815C500DB3EFA /* ReviewItem.swift in Sources */,
 				0C09D242293825000062C553 /* RecordHelper.swift in Sources */,
 				0C09D240293824560062C553 /* RecordingDataModel.swift in Sources */,
 				0CF5E5492946A48600DB3EFA /* AddWorkOutView.swift in Sources */,
@@ -294,6 +301,7 @@
 				0C875302292837B60080228F /* ReviewView.swift in Sources */,
 				0C4014F62931B6B200CCF391 /* RecordingListView.swift in Sources */,
 				0CF5E5472945997100DB3EFA /* SleepResultRowView.swift in Sources */,
+				0CF5E54B2946BEE100DB3EFA /* workOutItem.swift in Sources */,
 				0C49455A293FB1E400175670 /* SleepHistory.swift in Sources */,
 				0C465A6A29341FB8006392B0 /* AudioDisplay.swift in Sources */,
 				0C03B2E02849A69000CBEEBA /* SleepView.swift in Sources */,

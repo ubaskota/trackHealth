@@ -10,6 +10,7 @@
         <attribute name="foodThree" optional="YES" attributeType="String"/>
         <attribute name="foodTwo" optional="YES" attributeType="String"/>
         <attribute name="mealType" optional="YES" attributeType="String"/>
+        <attribute name="recordDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="totalCalories" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
     </entity>
@@ -31,5 +32,12 @@
         <attribute name="soundDb" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[Double]"/>
         <attribute name="survey" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="Work" representedClassName="Work" syncable="YES" codeGenerationType="class">
+        <attribute name="recordDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="runWalkTotal" optional="YES" attributeType="Float" valueTransformerName="NSSecureUnarchiveFromData" defaultValueString="0.0" usesScalarValueType="YES" customClassName="[String]"/>
+        <attribute name="sportsTotal" optional="YES" attributeType="Integer 32" valueTransformerName="NSSecureUnarchiveFromData" defaultValueString="0.0" usesScalarValueType="YES" customClassName="[String]"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="weightsTotal" optional="YES" attributeType="Integer 32" valueTransformerName="NSSecureUnarchiveFromData" defaultValueString="0.0" usesScalarValueType="YES" customClassName="[String]"/>
     </entity>
 </model>
