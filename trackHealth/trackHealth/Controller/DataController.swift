@@ -181,17 +181,17 @@ class DataController: ObservableObject {
 //		let filter: NSPredicate
 		var sleepData: [Sleep]
 		var listDates: [Date] = []
-		let highScore: Float = 75.0
+//		let highScore: Float = 75.0
 		
 		let fetchRequest: NSFetchRequest<Sleep> = Sleep.fetchRequest()
 		fetchRequest.returnsObjectsAsFaults = false
 		
 		if scoreType == "high" {
-			let filter = NSPredicate(format: "sleepScore >= %@", highScore)
+			let filter = NSPredicate(format: "sleepScore >= %@", "80")
 			fetchRequest.predicate = filter
 		}
 		else {
-			let filter = NSPredicate(format: "sleepScore <= %@", highScore)
+			let filter = NSPredicate(format: "sleepScore <= %@", "80")
 			fetchRequest.predicate = filter
 		}
 //		fetchRequest.predicate = filter
