@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//@available(iOS 16.0, *)
 struct ContentView: View {
 	
 	@State var showingProfile = false;
@@ -25,7 +26,7 @@ struct ContentView: View {
 						case "Sleep":
 							SleepView()
 						case "Review":
-							ReviewView(mealItem: MealItem())
+							ReviewView(reviewItem: ReviewItem())
 						default:
 							FoodView(mealItem: MealItem())
 						}
@@ -74,6 +75,7 @@ struct ContentView: View {
 }
 
 
+//@available(iOS 16.0, *)
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()

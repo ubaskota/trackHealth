@@ -48,6 +48,7 @@ struct SleepGraphView: View {
 }
 
 
+//@available(iOS 16.0, *)
 struct SleepGraphView_Previews: PreviewProvider {
 	static var previews: some View {
 		ContentView()

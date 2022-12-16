@@ -8,6 +8,7 @@
 import SwiftUI
 
 
+//@available(iOS 16.0, *)
 struct SleepRecordSurveyView: View {
 	
 	var recordMessage: String
@@ -93,6 +94,7 @@ struct RatingView: View {
 	}
 }
 
+//@available(iOS 16.0, *)
 struct SleepRecordSurveyView_Previews: PreviewProvider {
     static var previews: some View {
         SleepRecordSurveyView(recordMessage: "You've stopped your recording", survey: 1, audioRecorder: AudioRecorder(), showAlert: false)

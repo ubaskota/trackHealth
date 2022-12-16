@@ -175,4 +175,108 @@ class DataController: ObservableObject {
 		}
 	}
 	
+	
+	//Review analysis
+	func getSleepScoreDatesFromCoreData(scoreType: String) -> [Date] {
+//		let filter: NSPredicate
+		var sleepData: [Sleep]
+		var listDates: [Date] = []
+		let highScore: Float = 75.0
+		
+		let fetchRequest: NSFetchRequest<Sleep> = Sleep.fetchRequest()
+		fetchRequest.returnsObjectsAsFaults = false
+		
+		if scoreType == "high" {
+			let filter = NSPredicate(format: "sleepScore >= %@", highScore)
+			fetchRequest.predicate = filter
+		}
+		else {
+			let filter = NSPredicate(format: "sleepScore <= %@", highScore)
+			fetchRequest.predicate = filter
+		}
+//		fetchRequest.predicate = filter
+		
+		do {
+			sleepData = try container.viewContext.fetch(fetchRequest)
+		} catch let error {
+			print("ERROR while fetching data from db array \(error.localizedDescription)")
+			return []
+		}
+		
+		for item in sleepData {
+			listDates.append(item.sleepStartTime ?? Date())
+		}
+		return listDates
+	}
+	
+	
+	func getAverageCaloriesOfDatesFromCoreData(allDates: [Date]) -> Int32 {
+		let sleepData: [Meal]
+		var total_calories: Int32 = 0
+		var averageCalories: Int32
+		var totalCount: Int32 = 0
+//		let datesCount: Int = allDates.count
+		
+		let fetchRequest: NSFetchRequest<Meal> = Meal.fetchRequest()
+		fetchRequest.returnsObjectsAsFaults = false
+//		let filter = fetchRequest.predicate
+		
+		do {
+			sleepData = try container.viewContext.fetch(fetchRequest)
+		} catch let error {
+			print("ERROR while fetching data from db array \(error.localizedDescription)")
+			return 0
+		}
+		
+		for l_date in allDates {
+			for item in sleepData {
+				if item.recordDate == l_date {
+					total_calories += item.totalCalories
+					totalCount += 1
+				}
+			}
+		}
+		if totalCount == 0{
+			return total_calories
+		}
+		averageCalories = total_calories/totalCount
+		return averageCalories
+	}
+	
+	
+	func getAverageWorkOutOfDatesFromCoreData(allDates: [Date]) -> Int32 {
+		let workOutData: [Work]
+		var totalTime: Int32 = 0
+		var averageTime: Int32
+		var totalCount: Int32 = 0
+//		let datesCount: Int = allDates.count
+		
+		let fetchRequest: NSFetchRequest<Work> = Work.fetchRequest()
+		fetchRequest.returnsObjectsAsFaults = false
+//		let filter = fetchRequest.predicate
+		
+		do {
+			workOutData = try container.viewContext.fetch(fetchRequest)
+		} catch let error {
+			print("ERROR while fetching data from db array \(error.localizedDescription)")
+			return 0
+		}
+		
+		for l_date in allDates {
+			for item in workOutData {
+				if item.recordDate == l_date {
+					totalTime += item.sportsTotal
+					totalTime += item.weightsTotal
+					totalTime += Int32(item.runWalkTotal * 20.0)
+					totalCount += 1
+				}
+			}
+		}
+		if totalCount == 0 {
+			return totalTime
+		}
+		averageTime = totalTime/totalCount
+		return averageTime
+	}
+
 }
