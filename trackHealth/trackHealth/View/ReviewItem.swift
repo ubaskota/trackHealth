@@ -19,7 +19,6 @@ class ReviewItem: NSObject, ObservableObject {
 		let scoreDates = getSleepScoreDates(scoreType: scoreType)
 		let averageCalories = getAverageCaloriesOfDates(allDates: scoreDates)
 		return averageCalories
-		
 	}
 	
 	
@@ -31,12 +30,14 @@ class ReviewItem: NSObject, ObservableObject {
 	
 	
 	func getSleepScoreDates(scoreType: String) -> [Date]{
-		return coreDM.getSleepScoreDatesFromCoreData(scoreType: scoreType)
+		let sleepScoreDates = coreDM.getSleepScoreDatesFromCoreData(scoreType: scoreType)
+		return sleepScoreDates
 	}
 	
 	
 	func getAverageCaloriesOfDates(allDates: [Date]) -> Int32 {
-		return coreDM.getAverageCaloriesOfDatesFromCoreData(allDates: allDates)
+		let averageCaloriesOfDates = coreDM.getAverageCaloriesOfDatesFromCoreData(allDates: allDates)
+		return averageCaloriesOfDates
 	}
 	
 	

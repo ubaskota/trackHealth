@@ -86,6 +86,7 @@ class DataController: ObservableObject {
 		
 		let meal = Meal(context: container.viewContext)
 		meal.uuid = UUID()
+		meal.recordDate = Date()
 		meal.mealType = mealType
 		meal.foodOne = foodOne
 		meal.foodTwo = foodTwo
@@ -153,12 +154,13 @@ class DataController: ObservableObject {
 		workout.weightsTotal =  weightsTotal
 		workout.sportsTotal = sportsTotal
 		workout.runWalkTotal = runWalkTotal
+		workout.recordDate = Date()
 		
 		do {
 			try container.viewContext.save()
-				print("Successfully saved meals...")
+				print("Successfully saved workout date")
 		} catch {
-			print("Unexpected error in meal adddition: \(error).")
+			print("Unexpected error in workout adddition: \(error).")
 		}
 	}
 	
@@ -191,7 +193,7 @@ class DataController: ObservableObject {
 			fetchRequest.predicate = filter
 		}
 		else {
-			let filter = NSPredicate(format: "sleepScore <= %@", "80")
+			let filter = NSPredicate(format: "sleepScore < %@", "80")
 			fetchRequest.predicate = filter
 		}
 //		fetchRequest.predicate = filter
@@ -204,14 +206,14 @@ class DataController: ObservableObject {
 		}
 		
 		for item in sleepData {
-			listDates.append(item.sleepStartTime ?? Date())
+			listDates.append(item.sleepStartTime!)
 		}
 		return listDates
 	}
 	
 	
 	func getAverageCaloriesOfDatesFromCoreData(allDates: [Date]) -> Int32 {
-		let sleepData: [Meal]
+		let calorieData: [Meal]
 		var total_calories: Int32 = 0
 		var averageCalories: Int32
 		var totalCount: Int32 = 0
@@ -222,15 +224,24 @@ class DataController: ObservableObject {
 //		let filter = fetchRequest.predicate
 		
 		do {
-			sleepData = try container.viewContext.fetch(fetchRequest)
+			calorieData = try container.viewContext.fetch(fetchRequest)
 		} catch let error {
 			print("ERROR while fetching data from db array \(error.localizedDescription)")
 			return 0
 		}
-		
+//
+//		for item in calorieData {
+//			print("This is record date: \(item.recordDate)")
+//		}
+
 		for l_date in allDates {
-			for item in sleepData {
-				if item.recordDate == l_date {
+			for item in calorieData{
+//				var theDate = Date()
+//				print("This is the date: \(theDate)")
+//				print("This is item.recorddate: ", item.recordDate?.toString(dateFormat: "dd-MM-YY"))
+//				print("This is l_date: ", l_date.toString(dateFormat: "dd-MM-YY"))
+//				print(item.recordDate?.toString(dateFormat: "dd-MM-YY") == l_date.toString(dateFormat: "dd-MM-YY"))
+				if item.recordDate?.toString(dateFormat: "dd-MM-YY") == l_date.toString(dateFormat: "dd-MM-YY") {
 					total_calories += item.totalCalories
 					totalCount += 1
 				}
@@ -241,6 +252,7 @@ class DataController: ObservableObject {
 		}
 		averageCalories = total_calories/totalCount
 		return averageCalories
+//		return 0
 	}
 	
 	
@@ -264,7 +276,7 @@ class DataController: ObservableObject {
 		
 		for l_date in allDates {
 			for item in workOutData {
-				if item.recordDate == l_date {
+				if  item.recordDate?.toString(dateFormat: "dd-MM-YY") == l_date.toString(dateFormat: "dd-MM-YY") {
 					totalTime += item.sportsTotal
 					totalTime += item.weightsTotal
 					totalTime += Int32(item.runWalkTotal * 20.0)

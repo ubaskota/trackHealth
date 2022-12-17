@@ -64,7 +64,7 @@ struct SleepRecordView: View {
 								.aspectRatio(contentMode: .fill)
 								.frame(width: 150, height: 150)
 								.clipped()
-								.foregroundColor(.red)
+								.foregroundColor(.blue)
 						}
 					}
 					VStack {

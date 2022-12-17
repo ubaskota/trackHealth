@@ -27,6 +27,7 @@ import SwiftUICharts
 import SwiftUI
 
 struct SleepGraphView: View {
+	var sleepScore: Int
 	var sleepFileName: String
 	var sleepStartTime: Date
 	var sleepStopTime: Date
@@ -35,7 +36,7 @@ struct SleepGraphView: View {
 	var body: some View {
 
 		VStack {
-			LineView(data: audioRecorder.getSleepArrayFromCoreData(recordDateTime: sleepFileName), title: "Sleep Chart", legend: "Loudness of the sound recorded in your sleep from \(getDateInHours(for: sleepStartTime)) to \(getDateInHours(for: sleepStopTime)), left to right.")
+			LineView(data: audioRecorder.getSleepArrayFromCoreData(recordDateTime: sleepFileName), title: "Sleep Chart", legend: "Loudness of the sound recorded in your sleep from \(getDateInHours(for: sleepStartTime)) to \(getDateInHours(for: sleepStopTime)), left to right. Sleep score: \(sleepScore)")
 				.frame(height: 500)
 		}
 		
