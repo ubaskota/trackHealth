@@ -37,6 +37,7 @@
 		0CCB2EEA29396C3E0055BCA7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCB2EE929396C3E0055BCA7 /* LoginView.swift */; };
 		0CD68A5C293B05DC00FA6A40 /* SleepRecordSurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD68A5B293B05DC00FA6A40 /* SleepRecordSurveyView.swift */; };
 		0CD68A5E293B19D500FA6A40 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD68A5D293B19D500FA6A40 /* TestView.swift */; };
+		0CE8FCF6294D7442009C32EB /* ProfileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE8FCF5294D7442009C32EB /* ProfileDetailView.swift */; };
 		0CF5E54229450AF000DB3EFA /* SleepGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF5E54129450AF000DB3EFA /* SleepGraphView.swift */; };
 		0CF5E545294517B200DB3EFA /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 0CF5E544294517B200DB3EFA /* SwiftUICharts */; };
 		0CF5E5472945997100DB3EFA /* SleepResultRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF5E5462945997100DB3EFA /* SleepResultRowView.swift */; };
@@ -77,6 +78,7 @@
 		0CCB2EE929396C3E0055BCA7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		0CD68A5B293B05DC00FA6A40 /* SleepRecordSurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepRecordSurveyView.swift; sourceTree = "<group>"; };
 		0CD68A5D293B19D500FA6A40 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		0CE8FCF5294D7442009C32EB /* ProfileDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailView.swift; sourceTree = "<group>"; };
 		0CF5E54129450AF000DB3EFA /* SleepGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepGraphView.swift; sourceTree = "<group>"; };
 		0CF5E5462945997100DB3EFA /* SleepResultRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepResultRowView.swift; sourceTree = "<group>"; };
 		0CF5E5482946A48600DB3EFA /* AddWorkOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkOutView.swift; sourceTree = SOURCE_ROOT; };
@@ -169,6 +171,7 @@
 				0C875301292837B60080228F /* ReviewView.swift */,
 				0C03B2DD28485A7100CBEEBA /* AddMealView.swift */,
 				0C7ACDBE2921EE6B009C32C8 /* ProfileEditView.swift */,
+				0CE8FCF5294D7442009C32EB /* ProfileDetailView.swift */,
 				0C4014F52931B6B200CCF391 /* RecordingListView.swift */,
 				0CCB2EE929396C3E0055BCA7 /* LoginView.swift */,
 				0CD68A5D293B19D500FA6A40 /* TestView.swift */,
@@ -305,6 +308,7 @@
 				0C49455A293FB1E400175670 /* SleepHistory.swift in Sources */,
 				0C465A6A29341FB8006392B0 /* AudioDisplay.swift in Sources */,
 				0C03B2E02849A69000CBEEBA /* SleepView.swift in Sources */,
+				0CE8FCF6294D7442009C32EB /* ProfileDetailView.swift in Sources */,
 				0C49455D293FBF1800175670 /* HealthData.xcdatamodeld in Sources */,
 				0C8752F92922B8ED0080228F /* ProfileDetails.swift in Sources */,
 				0CD68A5E293B19D500FA6A40 /* TestView.swift in Sources */,

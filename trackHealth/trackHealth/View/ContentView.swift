@@ -32,6 +32,8 @@ struct ContentView: View {
 						}
 					} label: {
 					VStack {
+						NavigationLink(destination: ProfileDetailView(profileItem: ProfileItem()), isActive: self.$showingProfile) { EmptyView()}
+						
 						Image(topicImage[topic] ?? "foodImg")
 							.resizable()
 							.scaledToFit()
@@ -60,9 +62,11 @@ struct ContentView: View {
 						self.showingProfile.toggle()
 					}) {
 						Text("Profile")
-					}.sheet(isPresented: $showingProfile) {
-						ProfileEditView(profileItem: ProfileItem())
 					}
+//					.sheet(isPresented: $showingProfile) {
+////						ProfileEditView(profileItem: ProfileItem())
+//						ProfileDetailView(profileItem: ProfileItem())
+//					}
 						.font(.system(size: 20, weight: Font.Weight.bold))
 						.foregroundColor(Color.green)
 				}
