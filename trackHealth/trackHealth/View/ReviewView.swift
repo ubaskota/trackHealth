@@ -31,8 +31,8 @@ struct ReviewView: View {
 	var physicalVSsleep: [PhysicalData]
 	
 	let markColors: [LinearGradient] = [
-		LinearGradient(colors: [.red, .pink,], startPoint: .leading, endPoint: .trailing),
-		LinearGradient(colors: [.blue, .green], startPoint: .leading, endPoint: .trailing)]
+		LinearGradient(colors: [.blue, .green], startPoint: .leading, endPoint: .trailing),
+		LinearGradient(colors: [.red, .pink,], startPoint: .leading, endPoint: .trailing)]
 	
 	init(reviewItem: ReviewItem) {
 //		averageCalories = reviewItem.getAverageCaloriesOfScore(scoreType: "high")
@@ -67,7 +67,7 @@ struct ReviewView: View {
 						)
 						.foregroundStyle(by: .value("Day", shape.condition))
 						.annotation(position: .top) {
-							Text("\(shape.averageMinutes)")
+							Text("\(shape.averageMinutes) minutes")
 								.foregroundColor(.indigo)
 						}
 					}
@@ -93,7 +93,7 @@ struct ReviewView: View {
 							)
 							.foregroundStyle(by: .value("Day", shape.condition))
 							.annotation(position: .top) {
-								Text("\(shape.averageCalories)")
+								Text("\(shape.averageCalories) calories")
 									.foregroundColor(.indigo)
 							}
 						}

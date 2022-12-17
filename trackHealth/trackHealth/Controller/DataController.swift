@@ -229,18 +229,9 @@ class DataController: ObservableObject {
 			print("ERROR while fetching data from db array \(error.localizedDescription)")
 			return 0
 		}
-//
-//		for item in calorieData {
-//			print("This is record date: \(item.recordDate)")
-//		}
 
 		for l_date in allDates {
 			for item in calorieData{
-//				var theDate = Date()
-//				print("This is the date: \(theDate)")
-//				print("This is item.recorddate: ", item.recordDate?.toString(dateFormat: "dd-MM-YY"))
-//				print("This is l_date: ", l_date.toString(dateFormat: "dd-MM-YY"))
-//				print(item.recordDate?.toString(dateFormat: "dd-MM-YY") == l_date.toString(dateFormat: "dd-MM-YY"))
 				if item.recordDate?.toString(dateFormat: "dd-MM-YY") == l_date.toString(dateFormat: "dd-MM-YY") {
 					total_calories += item.totalCalories
 					totalCount += 1
