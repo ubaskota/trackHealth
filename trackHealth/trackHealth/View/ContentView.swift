@@ -26,7 +26,8 @@ struct ContentView: View {
 						case "Sleep":
 							SleepView()
 						case "Review":
-							ReviewView(reviewItem: ReviewItem())
+//							ReviewView(reviewItem: ReviewItem())
+							ReviewListView()
 						default:
 							FoodView(mealItem: MealItem())
 						}

@@ -74,7 +74,6 @@ struct ReviewView: View {
 				}
 				.chartForegroundStyleScale(range: markColors)
 				.frame(height: 220)
-			
 			}
 			else {
 				Text("Upgrade to ios version 16.0 or higher")
