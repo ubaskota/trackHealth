@@ -50,4 +50,31 @@ class ReviewItem: NSObject, ObservableObject {
 	func getAllWorkOutOfDates(allDates: [Date]) -> [Int32] {
 		return []
 	}
+	
+	
+	func getWeeklyCaloriesAndScore() -> [CalorieAndScore] {
+		return coreDM.getWeeklyCaloriesAndScoreFromCoreData()
+//		return []
+	}
+	
+	func getWeeklyPhysicalAndScore() -> [PhysicalAndScore] {
+		return coreDM.getWeeklyPhysicalAndScoreFromCoreData()
+//		return []
+	}
+}
+
+
+struct CalorieAndScore: Identifiable {
+	var id = UUID()
+	let calorie: Int32
+	let score: String
+	let date: String
+}
+
+
+struct PhysicalAndScore: Identifiable {
+	var id = UUID()
+	let workOutMins: Int32
+	let score: String
+	let date: String
 }

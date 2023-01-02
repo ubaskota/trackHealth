@@ -21,7 +21,7 @@ struct ReviewListView: View {
 							ReviewView(reviewItem: ReviewItem())
 						default:
 //							SleepResultView()
-							ReviewWeeklyView()
+							ReviewWeeklyView(reviewItem: ReviewItem())
 						}
 					} label: {
 						VStack {

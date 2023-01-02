@@ -124,6 +124,8 @@ class AudioRecorder: NSObject, ObservableObject {
 		let creationDateTime = getCreationDate(for: directoryContents[0])
 		let displayRecording = DisplayRecording(displayCreationDate: getDisplayDate(for: creationDateTime), createdAt: creationDateTime)
 		recordingsForDisaply.append(displayRecording)
+		// Delete all previous recordings
+		deleteAllPreviousRecordings()
 		return displayRecording.displayCreationDate
 	}
 	

@@ -281,7 +281,105 @@ class DataController: ObservableObject {
 		averageTime = totalTime/totalCount
 		return averageTime
 	}
-
+	
+	//Weekly review
+	func getWeeklyCaloriesAndScoreFromCoreData() -> [CalorieAndScore] {
+		var weeklyCalorieScoreData: [CalorieAndScore] = []
+		let todaysDate = Date()
+		let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -17, to: Date())!
+		let weeklyCalorieData = getWeeklyCalorieDataFromCoreData(startDate: todaysDate, endDate: sevenDaysAgo)
+		let weeklySleepData = getWeeklySleepDataFromCoreData(startDate: todaysDate, endDate: sevenDaysAgo)
+		
+		for (cal, slp) in zip(weeklyCalorieData, weeklySleepData) {
+			print("This is cal date : \(String(describing: cal.recordDate))")
+			if cal.recordDate?.toString(dateFormat: "dd-MM-YY") == slp.sleepStartTime?.toString(dateFormat: "dd-MM-YY") {
+				let addDate = slp.sleepStartTime!.toString(dateFormat: "dd-MM-YY")
+				let score = slp.sleepScore <= 80 ? "low" : "high"
+				let toAdd = CalorieAndScore(calorie: cal.totalCalories, score: score, date: addDate)
+				weeklyCalorieScoreData.append(toAdd)
+			}
+		}
+		return weeklyCalorieScoreData
+	}
+	
+	
+	func getWeeklyPhysicalAndScoreFromCoreData() -> [PhysicalAndScore] {
+		var weeklyPhysicalScoreData: [PhysicalAndScore] = []
+		let todaysDate = Date()
+		let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -17, to: Date())!
+		let weeklyPhysicalData = getWeeklyPhysicalDataFromCoreData(startDate: todaysDate, endDate: sevenDaysAgo)
+		let weeklySleepData = getWeeklySleepDataFromCoreData(startDate: todaysDate, endDate: sevenDaysAgo)
+		
+		for (phl, slp) in zip(weeklyPhysicalData, weeklySleepData) {
+			print("This is phl date: \(String(describing: phl.recordDate))")
+			print("This is sleep date : \(String(describing: slp.sleepStartTime))")
+			if phl.recordDate?.toString(dateFormat: "dd-MM-YY") == slp.sleepStartTime?.toString(dateFormat: "dd-MM-YY") {
+				let addDate = slp.sleepStartTime!.toString(dateFormat: "dd-MM-YY")
+				let totalPhysicalTime = phl.sportsTotal + phl.weightsTotal + Int32(phl.runWalkTotal * 20.0)
+				let score = slp.sleepScore <= 80 ? "low" : "high"
+				let toAdd = PhysicalAndScore(workOutMins: totalPhysicalTime, score: score, date: addDate)
+				weeklyPhysicalScoreData.append(toAdd)
+			}
+		}
+		return weeklyPhysicalScoreData
+	}
+	
+	
+	func getWeeklyCalorieDataFromCoreData(startDate: Date, endDate: Date) -> [Meal] {
+		
+		var calorieData: [Meal]
+		
+		let fetchRequest: NSFetchRequest<Meal> = Meal.fetchRequest()
+		fetchRequest.returnsObjectsAsFaults = false
+		let filter = NSPredicate(format: "recordDate <= %@ AND recordDate > %@", startDate as NSDate, endDate as NSDate)
+//		let filter = NSPredicate(format: "recordDate <= %@", startDate as NSDate)
+		fetchRequest.predicate = filter
+		do {
+			calorieData = try container.viewContext.fetch(fetchRequest)
+		} catch let error {
+			print("Error while fetching data from db array \(error.localizedDescription)")
+			return []
+		}
+		return calorieData
+	}
+	
+	
+	func getWeeklySleepDataFromCoreData(startDate: Date, endDate: Date) -> [Sleep] {
+		
+		var sleepData: [Sleep]
+		
+		let fetchRequest: NSFetchRequest<Sleep> = Sleep.fetchRequest()
+		fetchRequest.returnsObjectsAsFaults = false
+		let filter = NSPredicate(format: "sleepStartTime <= %@ AND sleepStartTime > %@", startDate as NSDate, endDate as NSDate)
+		fetchRequest.predicate = filter
+		
+		do {
+			sleepData = try container.viewContext.fetch(fetchRequest)
+		} catch let error {
+			print("Error while fetching data from db array \(error.localizedDescription)")
+			return []
+		}
+		return sleepData
+	}
+	
+	
+	func getWeeklyPhysicalDataFromCoreData(startDate: Date, endDate: Date) -> [Work] {
+		
+		var workOutData: [Work]
+		
+		let fetchRequest: NSFetchRequest<Work> = Work.fetchRequest()
+		fetchRequest.returnsObjectsAsFaults = false
+		let filter = NSPredicate(format: "recordDate <= %@ AND recordDate > %@", startDate as NSDate, endDate as NSDate)
+		fetchRequest.predicate = filter
+		
+		do {
+			workOutData = try container.viewContext.fetch(fetchRequest)
+		} catch let error {
+			print("Error while fetching data from db array \(error.localizedDescription)")
+			return []
+		}
+		return workOutData
+	}
 }
 
 
