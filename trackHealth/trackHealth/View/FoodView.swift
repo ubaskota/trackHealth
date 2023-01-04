@@ -74,10 +74,20 @@ struct FoodView: View {
 			NavigationView {
 				VStack (spacing: 30) {
 					Text("Your average calorie intake so far: ")
+						.font(.system(size: 16, weight: .bold, design: .default)).foregroundColor(Color.green)
+						.padding([.top, .bottom])
 					Text("Breakfast : \(mealItem.getAverageCalorie(mealType: "Breakfast")) Calories")
+						.font(.system(size: 16, weight: .bold, design: .default)).foregroundColor(Color.green)
+						.padding([.top, .bottom])
 					Text("Lunch : \(mealItem.getAverageCalorie(mealType: "Lunch")) Calories")
+						.font(.system(size: 16, weight: .bold, design: .default)).foregroundColor(Color.green)
+						.padding([.top, .bottom])
 					Text("Dinner : \(mealItem.getAverageCalorie(mealType: "Dinner")) Calories")
+						.font(.system(size: 16, weight: .bold, design: .default)).foregroundColor(Color.green)
+						.padding([.top, .bottom])
 					Text("Snacks : \(mealItem.getAverageCalorie(mealType: "Snacks")) Calories")
+						.font(.system(size: 16, weight: .bold, design: .default)).foregroundColor(Color.green)
+						.padding([.top, .bottom])
 					.toolbar {
 						Button {
 							showingAddMeal = true

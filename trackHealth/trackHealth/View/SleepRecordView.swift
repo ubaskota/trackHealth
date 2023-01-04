@@ -41,7 +41,7 @@ struct SleepRecordView: View {
 							.stroke(.lightBackground))
 						.background(.darkBackground)
 					}
-					Text("Sleep recorder records your sleep and presents you with a sleep graph later.")
+					Text("Sleep recorder records your sleep, presents you with a sleep graph, and uses the data to calculate your sleep score.")
 						.font(.headline)
 						.foregroundColor(.green)
 						.frame(width: 350, height: 200)

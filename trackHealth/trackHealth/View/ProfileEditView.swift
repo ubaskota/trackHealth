@@ -54,7 +54,7 @@ struct ProfileEditView: View {
 					
 					
 					Section(header: Text("Select your race.")) {
-							Picker("Race ", selection: $race) {
+							Picker("Ethnicity ", selection: $race) {
 								ForEach(races, id: \.self) {
 									Text($0)
 								}

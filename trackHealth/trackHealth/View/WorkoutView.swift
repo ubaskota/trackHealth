@@ -29,9 +29,17 @@ struct WorkoutView: View {
 			NavigationView {
 				VStack (spacing: 30) {
 					Text("Your Average workout so far: ")
+						.font(.system(size: 16, weight: .bold, design: .default)).foregroundColor(Color.green)
+						.padding([.top, .bottom])
 					Text("Weights: \(workOutItem.getAverageWeightsTime()) minutes")
+						.font(.system(size: 16, weight: .bold, design: .default)).foregroundColor(Color.green)
+						.padding([.top, .bottom])
 					Text("Run/Walk: \(workOutItem.getAverageDistance()) miles")
+						.font(.system(size: 16, weight: .bold, design: .default)).foregroundColor(Color.green)
+						.padding([.top, .bottom])
 					Text("Sports: \(workOutItem.getAverageSportsTime()) minutes")
+						.font(.system(size: 16, weight: .bold, design: .default)).foregroundColor(Color.green)
+						.padding([.top, .bottom])
 					.toolbar {
 						Button {
 							showingAddWorkout = true

@@ -291,7 +291,7 @@ class DataController: ObservableObject {
 		let weeklySleepData = getWeeklySleepDataFromCoreData(startDate: todaysDate, endDate: sevenDaysAgo)
 		
 		for (cal, slp) in zip(weeklyCalorieData, weeklySleepData) {
-			print("This is cal date : \(String(describing: cal.recordDate))")
+//			print("This is cal date : \(String(describing: cal.recordDate))")
 			if cal.recordDate?.toString(dateFormat: "dd-MM-YY") == slp.sleepStartTime?.toString(dateFormat: "dd-MM-YY") {
 				let addDate = slp.sleepStartTime!.toString(dateFormat: "dd-MM-YY")
 				let score = slp.sleepScore <= 80 ? "low" : "high"

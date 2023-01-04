@@ -72,7 +72,7 @@ struct ContentView: View {
 						.foregroundColor(Color.green)
 				}
 			}
-			.navigationTitle("Track-Health")
+			.navigationTitle("trackHealth")
 		}
 		.background(.darkBackground)
 		.navigationBarBackButtonHidden(true)
