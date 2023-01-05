@@ -47,7 +47,8 @@ struct ReviewWeeklyView: View {
 	
     var body: some View {
 		VStack {
-			
+			Text("Past 7 days")
+				.underline()
 			VStack {
 				Text("Physical activities")
 					.font(.largeTitle)

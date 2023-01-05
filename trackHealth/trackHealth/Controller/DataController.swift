@@ -286,7 +286,7 @@ class DataController: ObservableObject {
 	func getWeeklyCaloriesAndScoreFromCoreData() -> [CalorieAndScore] {
 		var weeklyCalorieScoreData: [CalorieAndScore] = []
 		let todaysDate = Date()
-		let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -17, to: Date())!
+		let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -30, to: Date())!
 		let weeklyCalorieData = getWeeklyCalorieDataFromCoreData(startDate: todaysDate, endDate: sevenDaysAgo)
 		let weeklySleepData = getWeeklySleepDataFromCoreData(startDate: todaysDate, endDate: sevenDaysAgo)
 		
@@ -313,11 +313,11 @@ class DataController: ObservableObject {
 							continue
 						}
 						else {
-							let addDate = slp.sleepStartTime!.toString(dateFormat: "dd-MM-YY")
+							let addDate = slp.sleepStartTime!.toString(dateFormat: "LLL-dd")
 							let score = slp.sleepScore <= 80 ? "low" : "high"
 							let toAdd = CalorieAndScore(calorie: cal.totalCalories, score: score, date: addDate)
 							weeklyCalorieScoreData.append(toAdd)
-							alreadyCheckedDate.append(addDate)
+							alreadyCheckedDate.append(slp_onlyDate!)
 							countSoFar += 1
 						}
 					}
@@ -331,7 +331,7 @@ class DataController: ObservableObject {
 	func getWeeklyPhysicalAndScoreFromCoreData() -> [PhysicalAndScore] {
 		var weeklyPhysicalScoreData: [PhysicalAndScore] = []
 		let todaysDate = Date()
-		let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -17, to: Date())!
+		let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -30, to: Date())!
 		let weeklyPhysicalData = getWeeklyPhysicalDataFromCoreData(startDate: todaysDate, endDate: sevenDaysAgo)
 		let weeklySleepData = getWeeklySleepDataFromCoreData(startDate: todaysDate, endDate: sevenDaysAgo)
 		
@@ -357,12 +357,12 @@ class DataController: ObservableObject {
 							continue
 						}
 						else {
-							let addDate = slp.sleepStartTime!.toString(dateFormat: "dd-MM-YY")
+							let addDate = slp.sleepStartTime!.toString(dateFormat: "LLL-dd")
 							let totalPhysicalTime = phl.sportsTotal + phl.weightsTotal + Int32(phl.runWalkTotal * 20.0)
 							let score = slp.sleepScore <= 80 ? "low" : "high"
 							let toAdd = PhysicalAndScore(workOutMins: totalPhysicalTime, score: score, date: addDate)
 							weeklyPhysicalScoreData.append(toAdd)
-							alreadyCheckedDateOne.append(addDate)
+							alreadyCheckedDateOne.append(slp_onlyDate!)
 							countSoFarOne += 1
 						}
 					}

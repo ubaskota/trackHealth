@@ -49,6 +49,9 @@ struct ReviewView: View {
 //	@available(iOS 16.0, *)
 	var body: some View {
 		VStack {
+			Text("Average so far")
+				.underline()
+
 			Text("Physical activities")
 				.font(.largeTitle)
 			if #available(iOS 16.0, *) {
