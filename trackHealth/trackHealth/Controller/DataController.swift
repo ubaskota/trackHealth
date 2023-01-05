@@ -290,13 +290,38 @@ class DataController: ObservableObject {
 		let weeklyCalorieData = getWeeklyCalorieDataFromCoreData(startDate: todaysDate, endDate: sevenDaysAgo)
 		let weeklySleepData = getWeeklySleepDataFromCoreData(startDate: todaysDate, endDate: sevenDaysAgo)
 		
-		for (cal, slp) in zip(weeklyCalorieData, weeklySleepData) {
-//			print("This is cal date : \(String(describing: cal.recordDate))")
-			if cal.recordDate?.toString(dateFormat: "dd-MM-YY") == slp.sleepStartTime?.toString(dateFormat: "dd-MM-YY") {
-				let addDate = slp.sleepStartTime!.toString(dateFormat: "dd-MM-YY")
-				let score = slp.sleepScore <= 80 ? "low" : "high"
-				let toAdd = CalorieAndScore(calorie: cal.totalCalories, score: score, date: addDate)
-				weeklyCalorieScoreData.append(toAdd)
+//		for (cal, slp) in zip(weeklyCalorieData, weeklySleepData) {
+////			print("This is cal date : \(String(describing: cal.recordDate))")
+//			if cal.recordDate?.toString(dateFormat: "dd-MM-YY") == slp.sleepStartTime?.toString(dateFormat: "dd-MM-YY") {
+//				let addDate = slp.sleepStartTime!.toString(dateFormat: "dd-MM-YY")
+//				let score = slp.sleepScore <= 80 ? "low" : "high"
+//				let toAdd = CalorieAndScore(calorie: cal.totalCalories, score: score, date: addDate)
+//				weeklyCalorieScoreData.append(toAdd)
+//			}
+//		}
+		
+		var alreadyCheckedDate: [String] = []
+		var countSoFar = 0
+
+		for cal in weeklyCalorieData {
+			for slp in weeklySleepData {
+				let cal_onlyDate = cal.recordDate?.toString(dateFormat: "dd-MM-YY")
+				let slp_onlyDate = slp.sleepStartTime?.toString(dateFormat: "dd-MM-YY")
+				if countSoFar < 7 {
+					if cal_onlyDate == slp_onlyDate {
+						if alreadyCheckedDate.contains(cal_onlyDate!) || alreadyCheckedDate.contains(slp_onlyDate!) {
+							continue
+						}
+						else {
+							let addDate = slp.sleepStartTime!.toString(dateFormat: "dd-MM-YY")
+							let score = slp.sleepScore <= 80 ? "low" : "high"
+							let toAdd = CalorieAndScore(calorie: cal.totalCalories, score: score, date: addDate)
+							weeklyCalorieScoreData.append(toAdd)
+							alreadyCheckedDate.append(addDate)
+							countSoFar += 1
+						}
+					}
+				}
 			}
 		}
 		return weeklyCalorieScoreData
@@ -310,15 +335,38 @@ class DataController: ObservableObject {
 		let weeklyPhysicalData = getWeeklyPhysicalDataFromCoreData(startDate: todaysDate, endDate: sevenDaysAgo)
 		let weeklySleepData = getWeeklySleepDataFromCoreData(startDate: todaysDate, endDate: sevenDaysAgo)
 		
-		for (phl, slp) in zip(weeklyPhysicalData, weeklySleepData) {
-			print("This is phl date: \(String(describing: phl.recordDate))")
-			print("This is sleep date : \(String(describing: slp.sleepStartTime))")
-			if phl.recordDate?.toString(dateFormat: "dd-MM-YY") == slp.sleepStartTime?.toString(dateFormat: "dd-MM-YY") {
-				let addDate = slp.sleepStartTime!.toString(dateFormat: "dd-MM-YY")
-				let totalPhysicalTime = phl.sportsTotal + phl.weightsTotal + Int32(phl.runWalkTotal * 20.0)
-				let score = slp.sleepScore <= 80 ? "low" : "high"
-				let toAdd = PhysicalAndScore(workOutMins: totalPhysicalTime, score: score, date: addDate)
-				weeklyPhysicalScoreData.append(toAdd)
+		
+//		for (phl, slp) in zip(weeklyPhysicalData, weeklySleepData) {
+//			if phl.recordDate?.toString(dateFormat: "dd-MM-YY") == slp.sleepStartTime?.toString(dateFormat: "dd-MM-YY") {
+//				let addDate = slp.sleepStartTime!.toString(dateFormat: "dd-MM-YY")
+//				let totalPhysicalTime = phl.sportsTotal + phl.weightsTotal + Int32(phl.runWalkTotal * 20.0)
+//				let score = slp.sleepScore <= 80 ? "low" : "high"
+//				let toAdd = PhysicalAndScore(workOutMins: totalPhysicalTime, score: score, date: addDate)
+//				weeklyPhysicalScoreData.append(toAdd)
+//			}
+//		}
+		var countSoFarOne = 0
+		var alreadyCheckedDateOne: [String] = []
+		for phl in weeklyPhysicalData {
+			for slp in weeklySleepData {
+				let phl_onlyDate = phl.recordDate?.toString(dateFormat: "dd-MM-YY")
+				let slp_onlyDate = slp.sleepStartTime?.toString(dateFormat: "dd-MM-YY")
+				if countSoFarOne < 7 {
+					if phl_onlyDate == slp_onlyDate {
+						if alreadyCheckedDateOne.contains(phl_onlyDate!) || alreadyCheckedDateOne.contains(slp_onlyDate!) {
+							continue
+						}
+						else {
+							let addDate = slp.sleepStartTime!.toString(dateFormat: "dd-MM-YY")
+							let totalPhysicalTime = phl.sportsTotal + phl.weightsTotal + Int32(phl.runWalkTotal * 20.0)
+							let score = slp.sleepScore <= 80 ? "low" : "high"
+							let toAdd = PhysicalAndScore(workOutMins: totalPhysicalTime, score: score, date: addDate)
+							weeklyPhysicalScoreData.append(toAdd)
+							alreadyCheckedDateOne.append(addDate)
+							countSoFarOne += 1
+						}
+					}
+				}
 			}
 		}
 		return weeklyPhysicalScoreData
@@ -332,8 +380,11 @@ class DataController: ObservableObject {
 		let fetchRequest: NSFetchRequest<Meal> = Meal.fetchRequest()
 		fetchRequest.returnsObjectsAsFaults = false
 		let filter = NSPredicate(format: "recordDate <= %@ AND recordDate > %@", startDate as NSDate, endDate as NSDate)
+		let sort = NSSortDescriptor(key: "recordDate", ascending: false)
 //		let filter = NSPredicate(format: "recordDate <= %@", startDate as NSDate)
 		fetchRequest.predicate = filter
+		fetchRequest.sortDescriptors = [sort]
+		
 		do {
 			calorieData = try container.viewContext.fetch(fetchRequest)
 		} catch let error {
@@ -351,7 +402,9 @@ class DataController: ObservableObject {
 		let fetchRequest: NSFetchRequest<Sleep> = Sleep.fetchRequest()
 		fetchRequest.returnsObjectsAsFaults = false
 		let filter = NSPredicate(format: "sleepStartTime <= %@ AND sleepStartTime > %@", startDate as NSDate, endDate as NSDate)
+		let sort = NSSortDescriptor(key: "sleepStartTime", ascending: false)
 		fetchRequest.predicate = filter
+		fetchRequest.sortDescriptors = [sort]
 		
 		do {
 			sleepData = try container.viewContext.fetch(fetchRequest)
@@ -370,7 +423,9 @@ class DataController: ObservableObject {
 		let fetchRequest: NSFetchRequest<Work> = Work.fetchRequest()
 		fetchRequest.returnsObjectsAsFaults = false
 		let filter = NSPredicate(format: "recordDate <= %@ AND recordDate > %@", startDate as NSDate, endDate as NSDate)
+		let sort = NSSortDescriptor(key: "recordDate", ascending: false)
 		fetchRequest.predicate = filter
+		fetchRequest.sortDescriptors = [sort]
 		
 		do {
 			workOutData = try container.viewContext.fetch(fetchRequest)
@@ -381,5 +436,4 @@ class DataController: ObservableObject {
 		return workOutData
 	}
 }
-
 

@@ -31,8 +31,8 @@ struct ReviewWeeklyView: View {
 	var physicalVSsleep: [PhysicalWeeklyData]
 	
 	let markColors: [LinearGradient] = [
-		LinearGradient(colors: [.red, .pink,], startPoint: .leading, endPoint: .trailing),
-		LinearGradient(colors: [.blue, .green], startPoint: .leading, endPoint: .trailing)]
+		LinearGradient(colors: [.blue, .green], startPoint: .leading, endPoint: .trailing),
+		LinearGradient(colors: [.red, .pink,], startPoint: .leading, endPoint: .trailing)]
 	
 	init(reviewItem: ReviewItem) {
 		let weeklyCaloriesAndScore = reviewItem.getWeeklyCaloriesAndScore()
