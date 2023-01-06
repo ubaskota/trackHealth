@@ -21,13 +21,11 @@ func getCreationDate(for file: URL) -> Date {
 
 func getDisplayDate(for creationDate: Date) -> String {
 	let newCreationDate = creationDate.toString(dateFormat: "EEEE, MMM d, yyyy h:mm a")
-	print("This is creation date : ", newCreationDate)
 	return newCreationDate
 }
 
 func getDateInHours(for givenDateTime: Date) -> String {
 	let newCreationDate = givenDateTime.toString(dateFormat: "h:mm a")
-	print("This is creation date : ", newCreationDate)
 	return newCreationDate
 }
 

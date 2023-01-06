@@ -80,7 +80,7 @@ class AudioRecorder: NSObject, ObservableObject {
 					}
 					dbToAdd = (50 - dbToAdd) * 2
 					self.soundDb.append(Double(dbToAdd))
-					print(self.soundDb)
+//					print(self.soundDb)
 				}
 				if recording == false{
 					timer.invalidate()
@@ -110,7 +110,7 @@ class AudioRecorder: NSObject, ObservableObject {
 	func stopRecording() {
 		audioRecorder.stop()
 		recording = false
-		print(self.soundDb)
+//		print(self.soundDb)
 		self.sleepStopTime = Date()
 //		fetchRecordings()
 	}
@@ -153,7 +153,6 @@ class AudioRecorder: NSObject, ObservableObject {
 		if dBCount == 0 {
 			dBCount = 1
 		}
-		print("This iss the score from db array: \(totalDB/Double(dBCount))")
 		let finalSleepScore = (totalDB / Double(dBCount)) + Double(survey * 10)
 		return finalSleepScore
 	}
@@ -170,7 +169,6 @@ class AudioRecorder: NSObject, ObservableObject {
 //				filteredSleepDB.append(db)
 //			}
 		}
-		print(self.soundDb)
 		return filteredSleepDB
 	}
 	

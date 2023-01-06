@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class ReviewItem: NSObject, ObservableObject {
 	let coreDM: DataController = DataController.shared
@@ -44,8 +45,8 @@ class ReviewItem: NSObject, ObservableObject {
 	func getAverageWorkOutTimesOfDates(allDates: [Date]) -> Int32 {
 		return coreDM.getAverageWorkOutOfDatesFromCoreData(allDates: allDates)
 	}
-
-
+	
+	
 	//In the future we need to be able to get the data for all workout types
 	func getAllWorkOutOfDates(allDates: [Date]) -> [Int32] {
 		return []
@@ -54,15 +55,31 @@ class ReviewItem: NSObject, ObservableObject {
 	
 	func getWeeklyCaloriesAndScore() -> [CalorieAndScore] {
 		return coreDM.getWeeklyCaloriesAndScoreFromCoreData()
-//		return []
+		//		return []
 	}
 	
 	func getWeeklyPhysicalAndScore() -> [PhysicalAndScore] {
 		return coreDM.getWeeklyPhysicalAndScoreFromCoreData()
-//		return []
+		//		return []
 	}
+	
+	
+	//Gradient color in graph
+	//	func arrangeWeeklyGradColor(physicalData: [PhysicalWeeklyData]) -> [LinearGradient] {
+	//		var gradientToReturn: [LinearGradient] = []
+	//		for shape in physicalData{
+	//			if shape.condition == "Slept Well" {
+	//				gradientToReturn =  [LinearGradient(colors: [.blue, .green], startPoint: .leading, endPoint: .trailing), LinearGradient(colors: [.red, .pink,], startPoint: .leading, endPoint: .trailing)]
+	//				break
+	//			}
+	//			else {
+	//				gradientToReturn =  [LinearGradient(colors: [.red, .pink,], startPoint: .leading, endPoint: .trailing), LinearGradient(colors: [.blue, .green], startPoint: .leading, endPoint: .trailing)]
+	//				break
+	//			}
+	//		}
+	//		return gradientToReturn
+	//	}
 }
-
 
 struct CalorieAndScore: Identifiable {
 	var id = UUID()
@@ -77,4 +94,11 @@ struct PhysicalAndScore: Identifiable {
 	let workOutMins: Int32
 	let score: String
 	let date: String
+}
+
+
+struct DateAndTotalCalories: Identifiable {
+	var id = UUID()
+	let date: Date
+	let totalCalories: Int32
 }

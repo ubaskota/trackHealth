@@ -29,24 +29,31 @@ struct ReviewWeeklyView: View {
 	
 	var caloriesVSsleep: [CaloriesWeeklyData]
 	var physicalVSsleep: [PhysicalWeeklyData]
+//	var markColors: [LinearGradient]
 	
 	let markColors: [LinearGradient] = [
-		LinearGradient(colors: [.blue, .green], startPoint: .leading, endPoint: .trailing),
-		LinearGradient(colors: [.red, .pink,], startPoint: .leading, endPoint: .trailing)]
+		LinearGradient(colors: [.blue, .purple], startPoint: .leading, endPoint: .trailing),
+		LinearGradient(colors: [.green, .gray,], startPoint: .leading, endPoint: .trailing)]
+
 	
 	init(reviewItem: ReviewItem) {
 		let weeklyCaloriesAndScore = reviewItem.getWeeklyCaloriesAndScore()
 		let weeklyPhysicalAndScore = reviewItem.getWeeklyPhysicalAndScore()
+		
 		
 		let listLengthCal = weeklyCaloriesAndScore.count
 		caloriesVSsleep = (0..<listLengthCal).map({CaloriesWeeklyData(calories: weeklyCaloriesAndScore[$0].calorie, condition: weeklyCaloriesAndScore[$0].score == "high" ? "Slept well" : "Didn't sleep well", displayDate: weeklyCaloriesAndScore[$0].date)})
 		
 		let listLengthPhl = weeklyPhysicalAndScore.count
 		physicalVSsleep =  (0..<listLengthPhl).map({PhysicalWeeklyData(physicalMins: weeklyPhysicalAndScore[$0].workOutMins, condition: weeklyPhysicalAndScore[$0].score == "high" ? "Slept well" : "Didn't sleep well", displayDate: weeklyPhysicalAndScore[$0].date)})
+		
+//		markColors = reviewItem.arrangeWeeklyGradColor(physicalData: physicalVSsleep)
 	}
+
 	
     var body: some View {
 		VStack {
+			
 			Text("Past 7 days")
 				.underline()
 			VStack {
@@ -91,7 +98,7 @@ struct ReviewWeeklyView: View {
 							}
 						}
 					}
-					.chartForegroundStyleScale(range: markColors)
+					.chartForegroundStyleScale(range: self.markColors)
 					.frame(height: 220)
 				} else {
 					Text("Upgrade to ios version 16.0 or higher")

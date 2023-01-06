@@ -315,7 +315,7 @@ class DataController: ObservableObject {
 						else {
 							let addDate = slp.sleepStartTime!.toString(dateFormat: "LLL-dd")
 							let score = slp.sleepScore <= 80 ? "low" : "high"
-							let toAdd = CalorieAndScore(calorie: cal.totalCalories, score: score, date: addDate)
+							let toAdd = CalorieAndScore(calorie: totalCaloriesForThatDay(givenDate: slp.sleepStartTime!), score: score, date: addDate)
 							weeklyCalorieScoreData.append(toAdd)
 							alreadyCheckedDate.append(slp_onlyDate!)
 							countSoFar += 1
@@ -325,6 +325,38 @@ class DataController: ObservableObject {
 			}
 		}
 		return weeklyCalorieScoreData
+	}
+	
+	
+	func totalCaloriesForThatDay(givenDate: Date) -> Int32 {
+		var calorieData: [Meal] = []
+//		var totalCaloriesAndDate: [DateAndTotalCalories]
+//		var components = DateComponents()
+//		components.hour = 0
+//		components.minute = 0
+//		components.second = 0
+//		let date = Calendar.current.dateComponents([.month, .day, .month], from: givenDate)
+		let startDate = Calendar.current.date(bySettingHour: 0, minute: 00, second: 0, of: givenDate)!
+		print("This is start date : \(startDate)")
+		let endDate =  Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: givenDate)!
+		print("This is end date : \(endDate)")
+		let fetchRequest: NSFetchRequest<Meal> = Meal.fetchRequest()
+		fetchRequest.returnsObjectsAsFaults = false
+		let filter = NSPredicate(format: "recordDate <= %@ AND recordDate > %@", endDate as NSDate, startDate as NSDate)
+		fetchRequest.predicate = filter
+		
+		do {
+			calorieData = try container.viewContext.fetch(fetchRequest)
+		} catch let error {
+			print("Error while fetching data from db array \(error.localizedDescription)")
+		}
+		
+		var totalCalories: Int32 = 0
+		
+		for calData in calorieData {
+			totalCalories += calData.totalCalories
+		}
+		return totalCalories
 	}
 	
 	
