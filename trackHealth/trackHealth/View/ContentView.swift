@@ -33,7 +33,7 @@ struct ContentView: View {
 						}
 					} label: {
 					VStack {
-						NavigationLink(destination: ProfileDetailView(profileItem: ProfileItem()), isActive: self.$showingProfile) { EmptyView()}
+//						NavigationLink(destination: ProfileDetailView(profileItem: ProfileItem()), isActive: self.$showingProfile) { EmptyView()}
 						
 						Image(topicImage[topic] ?? "foodImg")
 							.resizable()
@@ -64,15 +64,15 @@ struct ContentView: View {
 					}) {
 						Text("Profile")
 					}
-//					.sheet(isPresented: $showingProfile) {
-////						ProfileEditView(profileItem: ProfileItem())
+					.sheet(isPresented: $showingProfile) {
+						ProfileEditView(profileItem: ProfileItem())
 //						ProfileDetailView(profileItem: ProfileItem())
-//					}
+					}
 						.font(.system(size: 20, weight: Font.Weight.bold))
 						.foregroundColor(Color.green)
 				}
 			}
-			.navigationTitle("trackHealth")
+			.navigationTitle("Sleep Magna")
 		}
 		.background(.darkBackground)
 		.navigationBarBackButtonHidden(true)

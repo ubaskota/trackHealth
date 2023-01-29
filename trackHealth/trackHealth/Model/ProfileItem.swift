@@ -17,8 +17,8 @@ class ProfileItem: NSObject, ObservableObject {
 	}
 	
 	
-	func saveProfileToCoredata(displayName: String, age: Int16, race: String, height: Float, weight: Float, preExistingConditions: Bool) {
-		coreDM.saveProfileDataToCoreData(displayName: displayName, age: age, race: race, height: height, weight: weight, preExistingConditions: preExistingConditions)
+	func saveProfileToCoredata(displayName: String, age: String, race: String, height: String, weight: String, preExistingConditions: String, gender: String) {
+		coreDM.saveProfileDataToCoreData(displayName: displayName, age: age, race: race, height: height, weight: weight, preExistingConditions: preExistingConditions, gender: gender)
 	}
 	
 	
@@ -33,7 +33,7 @@ class ProfileItem: NSObject, ObservableObject {
 		
 		for item in profileDetail {
 			if requestType == "name" {
-				return item.displayName ?? "NA. Fill out the form"
+				return item.displayName ?? "NA"
 			}
 			else if requestType == "age" {
 				return String(item.age)
@@ -45,7 +45,7 @@ class ProfileItem: NSObject, ObservableObject {
 				return String(item.weight)
 			}
 			else if requestType == "race" {
-				return item.race ?? "NA"
+				return item.race!
 			}
 			else if requestType == "gender" {
 				return item.gender ?? "NA"

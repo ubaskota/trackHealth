@@ -49,7 +49,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C03B2BE283F1CE500CBEEBA /* trackHealth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trackHealth.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C03B2BE283F1CE500CBEEBA /* Sleep Magna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sleep Magna.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C03B2C1283F1CE500CBEEBA /* trackHealthApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = trackHealthApp.swift; sourceTree = "<group>"; };
 		0C03B2C3283F1CE500CBEEBA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0C03B2C5283F1CE900CBEEBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -63,6 +63,7 @@
 		0C03B2E12849A6A000CBEEBA /* WorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutView.swift; sourceTree = "<group>"; };
 		0C09D23F293824560062C553 /* RecordingDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingDataModel.swift; sourceTree = "<group>"; };
 		0C09D241293825000062C553 /* RecordHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHelper.swift; sourceTree = "<group>"; };
+		0C22B237298372A500F1B16E /* Sleep-Magna-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Sleep-Magna-Info.plist"; sourceTree = "<group>"; };
 		0C4014F329318D8100CCF391 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		0C4014F52931B6B200CCF391 /* RecordingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingListView.swift; sourceTree = "<group>"; };
 		0C4014F72931BC2E00CCF391 /* Date-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date-Extension.swift"; sourceTree = "<group>"; };
@@ -105,6 +106,7 @@
 		0C03B2B5283F1CE400CBEEBA = {
 			isa = PBXGroup;
 			children = (
+				0C22B237298372A500F1B16E /* Sleep-Magna-Info.plist */,
 				0C03B2C0283F1CE500CBEEBA /* trackHealth */,
 				0C03B2BF283F1CE500CBEEBA /* Products */,
 			);
@@ -113,7 +115,7 @@
 		0C03B2BF283F1CE500CBEEBA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0C03B2BE283F1CE500CBEEBA /* trackHealth.app */,
+				0C03B2BE283F1CE500CBEEBA /* Sleep Magna.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -214,9 +216,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0C03B2BD283F1CE500CBEEBA /* trackHealth */ = {
+		0C03B2BD283F1CE500CBEEBA /* Sleep Magna */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0C03B2CC283F1CE900CBEEBA /* Build configuration list for PBXNativeTarget "trackHealth" */;
+			buildConfigurationList = 0C03B2CC283F1CE900CBEEBA /* Build configuration list for PBXNativeTarget "Sleep Magna" */;
 			buildPhases = (
 				0C03B2BA283F1CE500CBEEBA /* Sources */,
 				0C03B2BB283F1CE500CBEEBA /* Frameworks */,
@@ -226,12 +228,12 @@
 			);
 			dependencies = (
 			);
-			name = trackHealth;
+			name = "Sleep Magna";
 			packageProductDependencies = (
 				0CF5E544294517B200DB3EFA /* SwiftUICharts */,
 			);
 			productName = trackHealth;
-			productReference = 0C03B2BE283F1CE500CBEEBA /* trackHealth.app */;
+			productReference = 0C03B2BE283F1CE500CBEEBA /* Sleep Magna.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -265,7 +267,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0C03B2BD283F1CE500CBEEBA /* trackHealth */,
+				0C03B2BD283F1CE500CBEEBA /* Sleep Magna */,
 			);
 		};
 /* End PBXProject section */
@@ -451,11 +453,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"trackHealth/Preview Content\"";
-				DEVELOPMENT_TEAM = GW7U6XU7C7;
+				DEVELOPMENT_TEAM = GV65D94ZN9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Sleep-Magna-Info.plist";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please, allow us to use your microphone for audio recording.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -481,11 +483,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"trackHealth/Preview Content\"";
-				DEVELOPMENT_TEAM = GW7U6XU7C7;
+				DEVELOPMENT_TEAM = GV65D94ZN9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Sleep-Magna-Info.plist";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please, allow us to use your microphone for audio recording.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -515,7 +517,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0C03B2CC283F1CE900CBEEBA /* Build configuration list for PBXNativeTarget "trackHealth" */ = {
+		0C03B2CC283F1CE900CBEEBA /* Build configuration list for PBXNativeTarget "Sleep Magna" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0C03B2CD283F1CE900CBEEBA /* Debug */,

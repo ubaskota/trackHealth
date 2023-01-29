@@ -13,9 +13,9 @@ struct ProfileEditView: View {
 	@Environment(\.dismiss) var dismiss
 	var profileItem: ProfileItem
 	
-	let races = ["Asian", "Black", "South Asian", "White", "Hispanic", "American Indian", "Other"]
-	let conditions = ["Yes", "No"]
-	let genders = ["Male", "Female", "Other"]
+	let races = ["Select", "Other", "Asian", "Black", "South Asian", "White", "Hispanic", "American Indian"]
+	let conditions = ["Select", "No", "Yes"]
+	let genders = ["Select", "Male", "Female", "Other"]
 	
 	@State private var displayName = ""
 	@State private var age = ""
@@ -68,26 +68,57 @@ struct ProfileEditView: View {
 								Text($0)
 							}
 						}
-						.pickerStyle(WheelPickerStyle())
-						.clipped()
-						.frame(width: 100, height: 40)
+//						.pickerStyle(WheelPickerStyle())
+						.font(.system(size: 20, weight: .bold, design: .default)).foregroundColor(Color.green)
 					}
 					
-					Section(header: Text("Pre-Existing Condition")) {
-						Picker("Sample", selection: $preExistingConditions) {
+					Section(header: Text("Pre-existing sleep issue")) {
+						Picker("Condition", selection: $preExistingConditions) {
 							ForEach(conditions, id: \.self) {
 								Text($0)
 							}
 						}
-						.pickerStyle(WheelPickerStyle())
-						.clipped()
-						.frame(width: 100, height: 40)
+//						.pickerStyle(WheelPickerStyle())
+						.font(.system(size: 20, weight: .bold, design: .default)).foregroundColor(Color.green)
+					}
+					
+					// For saved information
+					
+					Section(header: Text("Saved User Information")) {
+						Text("Display Name : \(profileItem.getProfileDetails(requestType: "name"))")
+							.font(.system(size: 16, weight: .bold, design: .default)).foregroundColor(Color.green)
+							.padding([.top, .bottom])
+						Text("Age : \(profileItem.getProfileDetails(requestType: "age")) years")
+							.font(.system(size: 16, weight: .bold, design: .default)).foregroundColor(Color.green)
+							.padding([.top, .bottom])
+						Text("Height : \(profileItem.getProfileDetails(requestType: "height")) feet")
+							.font(.system(size: 16, weight: .bold, design: .default)).foregroundColor(Color.green)
+							.padding([.top, .bottom])
+						Text("Weight : \(profileItem.getProfileDetails(requestType: "weight"))")
+							.font(.system(size: 16, weight: .bold, design: .default)).foregroundColor(Color.green)
+							.padding([.top, .bottom])
+						Text("Ethnicity: \(profileItem.getProfileDetails(requestType: "race"))")
+							.font(.system(size: 16, weight: .bold, design: .default)).foregroundColor(Color.green)
+							.padding([.top, .bottom])
+						Text("gender : \(profileItem.getProfileDetails(requestType: "gender"))")
+							.font(.system(size: 16, weight: .bold, design: .default)).foregroundColor(Color.green)
+							.padding([.top, .bottom])
+						Text("Any known sleep issue/s : \(profileItem.getProfileDetails(requestType: "knownIssues"))")
+							.font(.system(size: 16, weight: .bold, design: .default)).foregroundColor(Color.green)
+							.padding([.top, .bottom])
+					}
+					
+					VStack(alignment: .trailing) {
+						Text("Contact us: tracksleephealth@gmail.com")
+							.fontWeight(.bold)
+							.font(.system(size: 16))
+							.foregroundColor(.green)
 					}
 				}
 				.toolbar {
 					Button("Save") {
 						preExCondition = convertToBool(statement: preExistingConditions)
-						profileItem.saveProfileToCoredata(displayName: displayName, age: Int16(age)!, race: race, height: Float(height)!, weight: Float(weight)!, preExistingConditions: preExCondition)
+						profileItem.saveProfileToCoredata(displayName: displayName, age: age, race: race, height: height, weight: weight, preExistingConditions: preExistingConditions, gender: gender)
 						dismiss()
 					}
 					.foregroundColor(disableForm ? .white : .green)
@@ -106,7 +137,7 @@ struct ProfileEditView: View {
 	
 	
 	var disableForm: Bool {
-		if (checkIfEmpty()) || !(checkIfNumber(input: age) || checkIfNumber(input: height) || checkIfNumber(input: weight)) {
+		if (checkIfEmpty() || !checkIfNumber(input: age) || !checkIfNumber(input: height) || !checkIfNumber(input: weight) || race == "Select" || gender == "Select" || preExistingConditions == "Select") {
 			return true
 		}
 		return false
@@ -114,7 +145,7 @@ struct ProfileEditView: View {
 	
 	
 	func checkIfEmpty() -> Bool {
-		if (displayName.isEmpty || age.isEmpty || height.isEmpty || weight.isEmpty) {
+		if (displayName.isEmpty || age.isEmpty || height.isEmpty || weight.isEmpty || race.isEmpty || gender.isEmpty || preExistingConditions.isEmpty) {
 			return true
 		}
 		else {
@@ -126,6 +157,7 @@ struct ProfileEditView: View {
 	
 	func checkIfNumber(input: String) -> Bool {
 		let characters = CharacterSet.decimalDigits
+		print("This is the result for : \(input) is \(CharacterSet(charactersIn: input).isSubset(of: characters))")
 		return CharacterSet(charactersIn: input).isSubset(of: characters)
 	}
 }

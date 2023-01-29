@@ -116,16 +116,22 @@ class DataController: ObservableObject {
 	
 	
 	//Profile Related
-	func saveProfileDataToCoreData(displayName: String, age: Int16, race: String, height: Float, weight: Float, preExistingConditions: Bool) {
+	func saveProfileDataToCoreData(displayName: String, age: String, race: String, height: String, weight: String, preExistingConditions: String, gender: String) {
+		
+		//First empty the existing coredata because we only want one data at any time
+		deleteProfileDataFromCoreData()
 		
 		let profile = Profile(context: container.viewContext)
 		profile.uuid = UUID()
 		profile.displayName = displayName
-		profile.age = age
+		profile.age = Int16(age)!
 		profile.race = race
-		profile.height = height
-		profile.weight = weight
-		profile.preExistingConditions = preExistingConditions
+		profile.height = Float(height)!
+		profile.weight = Float(weight)!
+//		print("This is the gender: \(gender)")
+		profile.gender = gender
+		profile.preExistingConditions = preExistingConditions == "YES" ? true : false
+		print("This is the condition : \(preExistingConditions)")
 		
 		do {
 			try container.viewContext.save()
@@ -147,6 +153,19 @@ class DataController: ObservableObject {
 		}
 	}
 	
+	
+	func deleteProfileDataFromCoreData() {
+		do {
+			let profileItems = getProfileDataFromCoreData()
+			
+			for item in profileItems {
+				container.viewContext.delete(item)
+			}
+			try container.viewContext.save()
+		} catch {
+			print("Error in delete operation!!!")
+		}
+	}
 	
 	//WorkOut related
 	func saveWorkOutDataToCoreData(weightsTotal: Int32, runWalkTotal: Float, sportsTotal: Int32) {
@@ -337,9 +356,9 @@ class DataController: ObservableObject {
 //		components.second = 0
 //		let date = Calendar.current.dateComponents([.month, .day, .month], from: givenDate)
 		let startDate = Calendar.current.date(bySettingHour: 0, minute: 00, second: 0, of: givenDate)!
-		print("This is start date : \(startDate)")
+//		print("This is start date : \(startDate)")
 		let endDate =  Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: givenDate)!
-		print("This is end date : \(endDate)")
+//		print("This is end date : \(endDate)")
 		let fetchRequest: NSFetchRequest<Meal> = Meal.fetchRequest()
 		fetchRequest.returnsObjectsAsFaults = false
 		let filter = NSPredicate(format: "recordDate <= %@ AND recordDate > %@", endDate as NSDate, startDate as NSDate)
